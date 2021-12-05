@@ -1,0 +1,74 @@
+:root {
+  --theme: #43883fff;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+}
+
+/*-----------------------------------------------------------------------------
+NAVBAR
+-----------------------------------------------------------------------------*/
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--theme);
+  z-index: 2;
+}
+
+.header-img {
+  height: 40vh;
+  width: 100%;
+  background: url("../images/playground.jpeg") center;
+  background-size: cover;
+}
+
+.title-text {
+  color: #fff;
+  position: relative;
+  left: 5vw;
+  top: 28vh;
+}
+
+.title-text h1 {
+  font-size: 2em;
+  font-weight: 600;
+}
+
+/*-----------------------------------------------------------------------------
+CONTENT
+-----------------------------------------------------------------------------*/
+.content {
+  padding: 20px;
+}
+
+.contact li {
+  list-style-type: none;
+  line-height: 160%;
+}
+
+.socials {
+  background-color: var(--theme);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/*-----------------------------------------------------------------------------
+FOOTER
+-----------------------------------------------------------------------------*/
+footer {
+  background-color: var(--theme);
+  color: white;
+  font-size: 75%;
+  padding-bottom: 30px;
+}
+
+footer .footer-contacts {
+  list-style-type: none;
+}
+
+.footer-row {
+  margin-bottom: 0;
+}
