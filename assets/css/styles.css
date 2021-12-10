@@ -59,6 +59,10 @@ CONTENT
   text-align: center;
 }
 
+.desktop-contacts {
+  display: none;
+}
+
 /*-----------------------------------------------------------------------------
 BOXES
 -----------------------------------------------------------------------------*/
@@ -100,53 +104,138 @@ BOXES
   border: 2px solid;
 }
 
-#projects {
-  background-image: url("../images/projects-box.png");
-  background-color: var(--theme);
-}
+  #informer {
+    background-image: url("../images/informer.png");
+    background-color: var(--theme);
+  }
 
-#informer {
-  background-image: url("../images/informer-box.png");
-  background-color: #DBDA3D;
-}
+  #projects {
+    background-image: url("../images/playground.jpg");
+    background-color: #DBDA3D;
+  }
 
-#events {
-  background-image: url("../images/events-box.png");
-  background-color: #DBDA3D;
-}
+  #events {
+    background-image: url("../images/events.jpg");
+    background-color: #DBDA3D;
+  }
 
-#directory {
-  background-image: url("../images/directory-box.png");
-  background-color: var(--theme);
-}
+  #directory {
+    background-image: url("../images/community.jpg");
+    background-color: var(--theme);
+  }
+
 
 /*-----------------------------------------------------------------------------
 CAROUSEL
 -----------------------------------------------------------------------------*/
-.carousel-container {
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .carousel-caption h3 {
+  align-items: center;
   text-shadow: 2px 2px 4px #303030;
 }
 
-/*-----------------------------------------------------------------------------
+/*---------------------------------j-------------------------------------------
 FOOTER
 -----------------------------------------------------------------------------*/
 footer {
   background-color: var(--theme);
   color: white;
   font-size: 75%;
+  padding-top: 10px;
   padding-bottom: 30px;
-}
-
-footer .footer-contacts {
-  list-style-type: none;
+  text-align: center;
 }
 
 .footer-row {
   margin-bottom: 0;
+}
+
+/*-----------------------------------------------------------------------------
+MEDIA QUERIES
+-----------------------------------------------------------------------------*/
+@media screen and (min-width: 920px) {
+
+  .navbar, .navbar-brand, li, p  {
+    font-size: 130%;
+  }
+
+  h4 {
+    font-size: 2em;
+  }
+
+  .header-img {
+    height: 55vh;
+  }
+
+  .title-text {
+    left: auto;
+    top: 25vh;
+  }
+
+  .title-text h1 {
+    font-size: 4em;
+    text-align: center;
+    text-shadow: 2px 2px 4px #303030;
+  }
+
+  .mobile-div {
+    display: none;
+  }
+
+  .desktop-contacts {
+    display: inline;
+  }
+
+  .contact-row {
+    padding: 2%;
+    text-align: center;
+  }
+
+  .desktop-contacts h4 {
+    margin-bottom: 20px;
+  }
+
+  .about-us {
+    padding: 5%;
+  }
+
+  .boxes {
+    height: 450px;
+    width: 20%;
+    margin: auto;
+    margin-top: 30px;
+  }
+
+  .boxes h3 {
+    top: 50px;
+    line-height: 1;
+    font-size: 2.8em;
+  }
+
+  .boxes h5 {
+    top: 70px;
+    line-height: 1;
+    font-size: 1.8em;
+  }
+
+  .boxes .btn {
+    top: 90px;
+    font-size: 1.3em;
+  }
+
+  #informer {
+    background-color: var(--theme);
+  }
+
+  #projects {
+    background-color: #DBDA3D;
+  }
+
+  #events {
+    background-color: var(--theme);
+  }
+
+  #directory {
+    background-color: #DBDA3D;
+  }
+
 }

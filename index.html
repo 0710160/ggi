@@ -69,8 +69,8 @@
     </div>
   </div>
 
-  <!-- Content Start -->
-  <div class="content container-fluid contact">
+  <!-- Mobile Contact Info -->
+  <div class="content container-fluid contact mobile-div">
     <h4>Get in touch with us:</h4>
     <ul>
       <li><b>Phone:</b> 03 4257719 or 021 2247483</li>
@@ -80,7 +80,7 @@
     </ul>
   </div>
 
-  <div class="container-fluid content socials">
+  <div class="container-fluid content socials mobile-div">
     <!-- SVG drawings -->
     <svg xmlns="http://www.w3.org/2000/svg" display="none">
       <symbol id="facebook" class="bi bi-facebook">
@@ -117,17 +117,44 @@
     </div>
   </div>
 
+  <!-- Desktop Contact & Socials -->
+  <div class="container desktop-contacts">
+    <div class="row justify-content-evenly">
+      <div class="col-4 contact-row">
+        <h4>Find us on social media:</h4>
+        <div class="row">
+          <div class="<col">
+            <a href="#"><svg class="bi ms-3" viewbox="0 0 24 24" width="120" height="120" fill="#43883fff" ;>
+                <use xlink:href="#facebook" />
+              </svg></a>
+          </div>
+          <div class="col">
+            <a href="#"><svg class="bi ms-3" viewbox="0 0 24 24" width="120" height="120" fill="#43883fff" ;>
+                <use xlink:href="#instagram" />
+              </svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 contact contact-row">
+        <h4>Get in touch with us:</h4>
+        <ul>
+          <li><b>Phone:</b> 03 4257719 or 021 2247483</li>
+          <li><b>Email:</b> info@greatergreenisland.nz</li>
+          <li><b>Office location:</b> Green Island Police Station, 198 Main South Road, Dunedin</li>
+          <li><b>Mailing address:</b> PO Box 13006, Green Island, Dunedin 9052</li>
+        </ul>
+      </div>
+      <div class="col-4 contact-row">
+        <h4>Join our mailing list:</h4>
+        <a href="#"><svg class="bi ms-3" viewbox="0 0 24 24" width="120" height="120" fill="#43883fff" ;>
+            <use xlink:href="#mailing" />
+          </svg></a>
+      </div>
+    </div>
+  </div>
+
   <!-- Image Box Links -->
   <div class="container-fluid image-boxes">
-    <div id="projects" class="boxes">
-      <h3>PROJECTS</h3>
-      <h5>Find out more</h5>
-      <h5>about the many</h5>
-      <h5>projects happening</h5>
-      <h5>in Greater Green</h5>
-      <h5>Island</h5>
-      <button type="button" class="btn btn-outline-light">LEARN MORE</button>
-    </div>
     <div id="informer" class="boxes">
       <h3>INFORMER</h3>
       <h5>Visit the Greater</h5>
@@ -135,6 +162,15 @@
       <h5>Informer to read</h5>
       <h5>our community</h5>
       <h5>newsletter</h5>
+      <button type="button" class="btn btn-outline-light">LEARN MORE</button>
+    </div>
+    <div id="projects" class="boxes">
+      <h3>PROJECTS</h3>
+      <h5>Find out more</h5>
+      <h5>about the many</h5>
+      <h5>projects happening</h5>
+      <h5>in Greater Green</h5>
+      <h5>Island</h5>
       <button type="button" class="btn btn-outline-light">LEARN MORE</button>
     </div>
     <div id="events" class="boxes">
@@ -147,7 +183,8 @@
       <button type="button" class="btn btn-outline-light">LEARN MORE</button>
     </div>
     <div id="directory" class="boxes">
-      <h3>COMMUNITY DIRECTORY</h3>
+      <h3>COMMUNITY</h3>
+      <h3>DIRECTORY</h3>
       <h5>Browse the </h5>
       <h5>Greater Green </h5>
       <h5>Island Community</h5>
@@ -162,38 +199,31 @@
     <p> The Greater Green Island Community Network was established in 2013 when a group of like-minded people came together with a shared desire to foster a strong community which works together to develop its own solutions - a community where
       neighbourhoods are again full of people we know as our neighbours.</p>
     <p> The Community Network has hosted a range of community events, such as a teddy bear's picnic, astronomy evening, community expos and artisan markets,
-    and has been instrumental in organizing road safety changes and community beautification. </p>
+      and has been instrumental in organizing road safety changes and community beautification. </p>
   </div>
 
   <!-- Carousel -->
   <div id="carouselControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
       <div class="carousel-item active">
         <a href="#">
           <img src="assets/images/playground.jpg" class="d-block w-100" alt="...">
         </a>
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Greater Green Island Playground</h5>
-          <p>Located beside Moyles Supermarket, the playground is a great community resource for families to get together. Click here to find out what the area offers.</p>
-        </div>
       </div>
       <div class="carousel-item">
         <a href="#">
           <img src="assets/images/brighton-beach.jpg" class="d-block w-100" alt="...">
         </a>
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Greater Green Island Facilities</h5>
-          <p>Our community is packed with recreation, sports, clubs, groups and community facilities. Click here to learn more.</p>
-        </div>
       </div>
       <div class="carousel-item">
         <a href="#">
           <img src="assets/images/informer.png" class="d-block w-100" alt="...">
         </a>
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Greater Green Island Community Informer</h5>
-          <p>The Informer can be found in retail stores around Green Island, but it's now also online! Click to read the latest articles.</p>
-        </div>
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselControls" data-bs-slide="prev">
@@ -209,28 +239,13 @@
 
   <!-- Footer -->
   <footer>
-    <div class="d-flex p-2">
-      <p class="flex-grow-1 credit footer-row">&copy; 2021 GGICN. All rights reserved.</p>
-      <ul class="list-unstyled d-flex p-2 footer-row">
-        <li><a href="#"><svg class="bi ms-3" viewbox="0 0 40 40" width="50" height="50" fill="#fff">
-              <use xlink:href="#facebook" />
-            </svg></a></li>
-        <li><a href="#"><svg class="bi ms-3" viewbox="0 0 40 40" width="50" height="50" fill="#fff">
-              <use xlink:href="#instagram" />
-            </svg></a></li>
-        <li><a href="#"><svg class="bi ms-3" viewbox="0 0 40 40" width="50" height="50" fill="#fff">
-              <use xlink:href="#mailing" />
-            </svg></a></li>
-      </ul>
-    </div>
-    <div footer-contacts>
+    <div class="footer-contacts">
+      <p>&copy; 2021 GGICN. All rights reserved.</p>
       <h5>Contact:</h5>
-      <ul>
-        <li><b>Phone:</b> 03 4257719 or 021 2247483</li>
-        <li><b>Email:</b> info@greatergreenisland.nz</li>
-        <li><b>Office location:</b> Green Island Police Station, 198 Main South Road, Dunedin</li>
-        <li><b>Mailing address:</b> PO Box 13006, Green Island, Dunedin 9052</li>
-      </ul>
+        <p><b>Phone:</b> 03 4257719 or 021 2247483</p>
+        <p><b>Email:</b> info@greatergreenisland.nz</p>
+        <p><b>Office location:</b> Green Island Police Station, 198 Main South Road, Dunedin</p>
+        <p><b>Mailing address:</b> PO Box 13006, Green Island, Dunedin 9052</p>
     </div>
   </footer>
 
