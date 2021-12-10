@@ -22,7 +22,6 @@ NAVBAR
 
 .header-img {
   height: 40vh;
-  width: 100%;
   background: url("../images/playground.jpeg") center;
   background-size: cover;
 }
@@ -66,11 +65,12 @@ BOXES
 .image-boxes {
   display: flex;
   flex-wrap: wrap;
+  padding: 0;
 }
 
 .boxes {
   height: 400px;
-  width: 50vw;
+  width: 50%;
   margin: 0;
   padding: 10px;
   background-position: center;
@@ -90,6 +90,7 @@ BOXES
 .boxes h5 {
   position: relative;
   top: 70px;
+  line-height: 1;
 }
 
 .boxes .btn {
@@ -100,22 +101,22 @@ BOXES
 
 #projects {
   background-image: url("../images/projects-box.png");
-  background-color: #55d400ff;
+  background-color: var(--theme);
 }
 
 #informer {
   background-image: url("../images/informer-box.png");
-  background-color: #55ddffff;
+  background-color: #DBDA3D;
 }
 
 #events {
   background-image: url("../images/events-box.png");
-  background-color: #ff6600ff;
+  background-color: #DBDA3D;
 }
 
 #directory {
   background-image: url("../images/directory-box.png");
-  background-color: #9166ffff;
+  background-color: var(--theme);
 }
 
 /*-----------------------------------------------------------------------------
