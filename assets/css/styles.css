@@ -58,9 +58,69 @@ CONTENT
 .socials {
   background-color: var(--theme);
   text-align: center;
-  margin-bottom: 20px;
 }
 
+/*-----------------------------------------------------------------------------
+BOXES
+-----------------------------------------------------------------------------*/
+.image-boxes {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.boxes {
+  height: 400px;
+  width: 50vw;
+  margin: 0;
+  padding: 10px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-blend-mode: soft-light;
+  color: white;
+  text-shadow: 1px 1px 2px #303030;
+  text-align: center;
+}
+
+.boxes h3 {
+  font-weight: 700;
+  position: relative;
+  top: 70px;
+}
+
+.boxes h5 {
+  position: relative;
+  top: 70px;
+}
+
+.boxes .btn {
+  position: relative;
+  top: 90px;
+  border: 2px solid;
+}
+
+#projects {
+  background-image: url("../images/projects-box.png");
+  background-color: #55d400ff;
+}
+
+#informer {
+  background-image: url("../images/informer-box.png");
+  background-color: #55ddffff;
+}
+
+#events {
+  background-image: url("../images/events-box.png");
+  background-color: #ff6600ff;
+}
+
+#directory {
+  background-image: url("../images/directory-box.png");
+  background-color: #9166ffff;
+}
+
+/*-----------------------------------------------------------------------------
+CAROUSEL
+-----------------------------------------------------------------------------*/
 .carousel-container {
   width: 80%;
   margin-left: auto;
