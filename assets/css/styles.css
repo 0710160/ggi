@@ -89,39 +89,60 @@ BOXES
   font-weight: 700;
   position: relative;
   top: 30px;
+  font-size: 7vw;
 }
 
 .boxes h5 {
   position: relative;
   top: 30px;
   line-height: 1;
-  font-size: 1.1em;
+  font-size: 5vw;
 }
 
-.boxes .btn {
-  position: relative;
-  top: 50px;
-  border: 2px solid;
+.boxes a {
+  color: white;
+  text-decoration: none;
+  text-shadow: 1px 1px 2px #303030;
 }
 
   #informer {
     background-image: url("../images/informer.png");
     background-color: var(--theme);
+    transition: background-color .5s;
   }
 
   #projects {
     background-image: url("../images/playground.jpg");
     background-color: #DBDA3D;
+    transition: background-color .5s;
   }
 
   #events {
     background-image: url("../images/events.jpg");
     background-color: #DBDA3D;
+    transition: background-color .5s;
   }
 
   #directory {
     background-image: url("../images/community.jpg");
     background-color: var(--theme);
+    transition: background-color .5s;
+  }
+
+  #informer:hover {
+    background-color: grey;
+  }
+
+  #projects:hover {
+    background-color: transparent;
+  }
+
+  #events:hover {
+    background-color: transparent;
+  }
+
+  #directory:hover {
+    background-color: transparent;
   }
 
 
@@ -131,6 +152,10 @@ CAROUSEL
 .carousel-caption h3 {
   align-items: center;
   text-shadow: 2px 2px 4px #303030;
+}
+
+.carousel-img {
+  width: 100%;
 }
 
 /*---------------------------------j-------------------------------------------
@@ -150,12 +175,46 @@ footer {
 }
 
 /*-----------------------------------------------------------------------------
-MEDIA QUERIES
+MEDIA QUERIES: LANDSCAPE PHONE
 -----------------------------------------------------------------------------*/
-@media screen and (min-width: 920px) {
+@media screen and (min-width: 576px) {
+
+  .boxes h3 {
+    top: 20px;
+    line-height: 1;
+    font-size: 5vw;
+  }
+
+  .boxes h5 {
+    top: 30px;
+    line-height: 1.2;
+    font-size: 3vw;
+  }
+}
+/*-----------------------------------------------------------------------------
+MEDIA QUERIES: TABLET
+-----------------------------------------------------------------------------*/
+@media screen and (min-width: 768px) {
+
+  .boxes h3 {
+    top: 20px;
+    line-height: 1;
+    font-size: 5vw;
+  }
+
+  .boxes h5 {
+    top: 30px;
+    line-height: 1.2;
+    font-size: 3vw;
+  }
+}
+/*-----------------------------------------------------------------------------
+MEDIA QUERIES: DESKTOP
+-----------------------------------------------------------------------------*/
+@media screen and (min-width: 992px) {
 
   .navbar, .navbar-brand, li, p  {
-    font-size: 130%;
+    font-size: 120%;
   }
 
   h4 {
@@ -198,6 +257,10 @@ MEDIA QUERIES
     padding: 5%;
   }
 
+  .image-boxes {
+    padding: 0 3%;
+  }
+
   .boxes {
     height: 450px;
     width: 20%;
@@ -206,20 +269,15 @@ MEDIA QUERIES
   }
 
   .boxes h3 {
-    top: 50px;
+    top: 60px;
     line-height: 1;
-    font-size: 2.8em;
+    font-size: 2.5vw;
   }
 
   .boxes h5 {
-    top: 70px;
-    line-height: 1;
-    font-size: 1.8em;
-  }
-
-  .boxes .btn {
-    top: 90px;
-    font-size: 1.3em;
+    top: 80px;
+    line-height: 1.3;
+    font-size: 1.8vw;
   }
 
   #informer {
@@ -236,6 +294,16 @@ MEDIA QUERIES
 
   #directory {
     background-color: #DBDA3D;
+  }
+
+  .d-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .carousel-img {
+    width: 60%;
   }
 
 }
