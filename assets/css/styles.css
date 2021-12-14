@@ -3,9 +3,18 @@
 }
 
 html, body {
-  font-family: 'Lato', sans-serif;
   max-width: 100%;
   overflow-x: hidden;
+}
+
+p, a, h5, h1, li {
+  font-family: 'Lato', sans-serif;
+}
+
+h4 {
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 /*-----------------------------------------------------------------------------
@@ -57,6 +66,7 @@ CONTENT
 .socials {
   background-color: var(--theme);
   text-align: center;
+  border-bottom: solid 0.2rem white;
 }
 
 .desktop-contacts {
@@ -64,98 +74,33 @@ CONTENT
 }
 
 /*-----------------------------------------------------------------------------
-BOXES
+ABOUT US
 -----------------------------------------------------------------------------*/
-.image-boxes {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0;
-}
-
-.boxes {
-  height: 300px;
-  width: 50%;
-  margin: 0;
-  padding: 10px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-blend-mode: soft-light;
+.about-us {
   color: white;
-  text-shadow: 1px 1px 2px #303030;
-  text-align: center;
+  background-color: var(--theme);
+  margin-bottom: 5%;
 }
-
-.boxes h3 {
-  font-weight: 700;
-  position: relative;
-  top: 30px;
-  font-size: 7vw;
-}
-
-.boxes h5 {
-  position: relative;
-  top: 30px;
-  line-height: 1;
-  font-size: 5vw;
-}
-
-.boxes a {
-  color: white;
-  text-decoration: none;
-  text-shadow: 1px 1px 2px #303030;
-}
-
-  #informer {
-    background-image: url("../images/informer.png");
-    background-color: var(--theme);
-    transition: background-color .5s;
-  }
-
-  #projects {
-    background-image: url("../images/playground.jpg");
-    background-color: #DBDA3D;
-    transition: background-color .5s;
-  }
-
-  #events {
-    background-image: url("../images/events.jpg");
-    background-color: #DBDA3D;
-    transition: background-color .5s;
-  }
-
-  #directory {
-    background-image: url("../images/community.jpg");
-    background-color: var(--theme);
-    transition: background-color .5s;
-  }
-
-  #informer:hover {
-    background-color: grey;
-  }
-
-  #projects:hover {
-    background-color: transparent;
-  }
-
-  #events:hover {
-    background-color: transparent;
-  }
-
-  #directory:hover {
-    background-color: transparent;
-  }
-
 
 /*-----------------------------------------------------------------------------
 CAROUSEL
 -----------------------------------------------------------------------------*/
-.carousel-caption h3 {
-  align-items: center;
-  text-shadow: 2px 2px 4px #303030;
+.carousel-section h4 {
+  margin-left: 5%;
 }
 
 .carousel-img {
   width: 100%;
+}
+
+.carousel-caption {
+  clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+  background-color: rgba(48,48,48,0.7);
+  position: absolute;
+  left: 0;
+  width: 90%;
+  padding: 3% 8%;
+  text-align: left;
 }
 
 /*---------------------------------j-------------------------------------------
@@ -168,57 +113,36 @@ footer {
   padding-top: 10px;
   padding-bottom: 30px;
   text-align: center;
+  margin-top: 3vh;
 }
 
 .footer-row {
   margin-bottom: 0;
 }
 
-/*-----------------------------------------------------------------------------
-MEDIA QUERIES: LANDSCAPE PHONE
------------------------------------------------------------------------------*/
-@media screen and (min-width: 576px) {
-
-  .boxes h3 {
-    top: 20px;
-    line-height: 1;
-    font-size: 5vw;
-  }
-
-  .boxes h5 {
-    top: 30px;
-    line-height: 1.2;
-    font-size: 3vw;
-  }
+footer p {
+  margin-bottom: 0.1rem;
 }
-/*-----------------------------------------------------------------------------
-MEDIA QUERIES: TABLET
------------------------------------------------------------------------------*/
-@media screen and (min-width: 768px) {
 
-  .boxes h3 {
-    top: 20px;
-    line-height: 1;
-    font-size: 5vw;
-  }
-
-  .boxes h5 {
-    top: 30px;
-    line-height: 1.2;
-    font-size: 3vw;
-  }
-}
 /*-----------------------------------------------------------------------------
 MEDIA QUERIES: DESKTOP
 -----------------------------------------------------------------------------*/
-@media screen and (min-width: 992px) {
-
-  .navbar, .navbar-brand, li, p  {
-    font-size: 120%;
-  }
+@media screen and (min-width: 990px) {
 
   h4 {
-    font-size: 2em;
+    margin-bottom: 2.2rem!important;
+  }
+
+  .navbar {
+    padding: 0 3%;
+  }
+
+  .navbar, .navbar-brand, li, p  {
+    font-size: 110%;
+  }
+
+  h4, h5 {
+    font-size: 200%;
   }
 
   .header-img {
@@ -249,51 +173,9 @@ MEDIA QUERIES: DESKTOP
     text-align: center;
   }
 
-  .desktop-contacts h4 {
-    margin-bottom: 20px;
-  }
-
   .about-us {
-    padding: 5%;
-  }
-
-  .image-boxes {
-    padding: 0 3%;
-  }
-
-  .boxes {
-    height: 450px;
-    width: 20%;
-    margin: auto;
-    margin-top: 30px;
-  }
-
-  .boxes h3 {
-    top: 60px;
-    line-height: 1;
-    font-size: 2.5vw;
-  }
-
-  .boxes h5 {
-    top: 80px;
-    line-height: 1.3;
-    font-size: 1.8vw;
-  }
-
-  #informer {
-    background-color: var(--theme);
-  }
-
-  #projects {
-    background-color: #DBDA3D;
-  }
-
-  #events {
-    background-color: var(--theme);
-  }
-
-  #directory {
-    background-color: #DBDA3D;
+    padding: 3% 5%;
+    border-radius: 0 50px;
   }
 
   .d-flex {
@@ -306,4 +188,13 @@ MEDIA QUERIES: DESKTOP
     width: 60%;
   }
 
+  .carousel-caption {
+    left: 20%;
+    width: 50%;
+    padding: 1% 2%;
+}
+
+  .carousel-control-next, .carousel-control-prev {
+      filter: invert(100%);
+  }
 }

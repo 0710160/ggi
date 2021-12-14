@@ -17,8 +17,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
   <!-- Custom CSS -->
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
@@ -71,7 +70,7 @@
 
   <!-- Mobile Contact Info -->
   <div class="content container-fluid contact mobile-div">
-    <h4>Get in touch with us:</h4>
+    <h4>Get in touch with us</h4>
     <ul>
       <li><b>Phone:</b> 03 4257719 or 021 2247483</li>
       <li><b>Email:</b> info@greatergreenisland.nz</li>
@@ -121,7 +120,7 @@
   <div class="container desktop-contacts">
     <div class="row justify-content-evenly">
       <div class="col-4 contact-row">
-        <h4>Find us on social media:</h4>
+        <h4>Find us on social media</h4>
         <div class="row justify-content-evenly">
           <div class="col-4">
             <a href="#"><svg class="bi ms-3" viewbox="0 0 24 24" width="120" height="120" fill="#43883fff" ;>
@@ -136,7 +135,7 @@
         </div>
       </div>
       <div class="col-4 contact contact-row">
-        <h4>Get in touch with us:</h4>
+        <h4>Get in touch with us</h4>
         <ul>
           <li><b>Phone:</b> 03 4257719 or 021 2247483</li>
           <li><b>Email:</b> info@greatergreenisland.nz</li>
@@ -145,7 +144,7 @@
         </ul>
       </div>
       <div class="col-4 contact-row">
-        <h4>Join our mailing list:</h4>
+        <h4>Join our mailing list</h4>
         <a href="#"><svg class="bi ms-3" viewbox="0 0 24 24" width="120" height="120" fill="#43883fff" ;>
             <use xlink:href="#mailing" />
           </svg></a>
@@ -153,60 +152,19 @@
     </div>
   </div>
 
-  <!-- Image Box Links -->
-  <div class="container-fluid image-boxes">
-    <div id="informer" class="boxes">
-      <a href="#">
-        <h3>INFORMER</h3>
-        <h5>Visit the Greater</h5>
-        <h5>Green Island</h5>
-        <h5>Informer to read</h5>
-        <h5>our community</h5>
-        <h5>newsletter</h5>
-      </a>
-    </div>
-    <div id="projects" class="boxes">
-      <a href="#">
-      <h3>PROJECTS</h3>
-      <h5>Find out more</h5>
-      <h5>about the many</h5>
-      <h5>projects happening</h5>
-      <h5>in Greater Green</h5>
-      <h5>Island</h5>
-    </a>
-    </div>
-    <div id="events" class="boxes">
-      <a href="#">
-      <h3>EVENTS</h3>
-      <h5>Click here to see</h5>
-      <h5>what's going on in</h5>
-      <h5>and around the</h5>
-      <h5>Greater Green </h5>
-      <h5>Island community</h5>
-    </a>
-    </div>
-    <div id="directory" class="boxes">
-      <a href="#">
-      <h3>COMMUNITY</h3>
-      <h3>DIRECTORY</h3>
-      <h5>Browse the </h5>
-      <h5>Greater Green </h5>
-      <h5>Island Community</h5>
-      <h5>Directory</h5>
-    </a>
-    </div>
-  </div>
 
   <!-- About -->
   <div class="content container-fluid about-us">
-    <h4>About us:</h4>
+    <h4>About us</h4>
     <p> The Greater Green Island Community Network was established in 2013 when a group of like-minded people came together with a shared desire to foster a strong community which works together to develop its own solutions - a community where
       neighbourhoods are again full of people we know as our neighbours.</p>
-    <p> The Community Network has hosted a range of community events, such as a teddy bear's picnic, astronomy evening, community expos and artisan markets,
+    <p> The Community Network has hosted a range of community events such as a teddy bear's picnic, astronomy evening, community expos and artisan markets,
       and has been instrumental in organizing road safety changes and community beautification. </p>
   </div>
 
   <!-- Carousel -->
+  <div class="carousel-section">
+  <h4>What's happening in GGI</h4>
   <div id="carouselControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-indicators">
@@ -218,6 +176,10 @@
         <a href="#">
           <div class="d-flex w-100">
             <img src="assets/images/playground.jpg" class="carousel-img" alt="...">
+            <div class="carousel-caption">
+              <h5>Playground and BBQ Area</h5>
+              <p>Check out what's happening at the playground and family BBQ area</p>
+            </div>
           </div>
         </a>
       </div>
@@ -225,6 +187,10 @@
         <a href="#">
           <div class="d-flex w-100">
             <img src="assets/images/brighton-beach.jpg" class="carousel-img" alt="...">
+            <div class="carousel-caption">
+              <h5>Things to Do and See</h5>
+              <p>Click to view our recreational areas and other things to do in GGI</p>
+            </div>
           </div>
         </a>
       </div>
@@ -232,30 +198,36 @@
         <a href="#">
           <div class="d-flex w-100">
             <img src="assets/images/informer.png" class="carousel-img" alt="...">
+            <div class="carousel-caption">
+              <h5 class="desktop-contacts">Greater Green Island Informer</h5>
+              <h5 class="mobile-div">GGI Informer</h5>
+              <p>Read Informer articles online here, or sign up to our email list</p>
+            </div>
           </div>
         </a>
       </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselControls" data-bs-slide="prev">
+    <button class="desktop-contacts carousel-control-prev" type="button" data-bs-target="#carouselControls" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselControls" data-bs-slide="next">
+    <button class="desktop-contacts carousel-control-next" type="button" data-bs-target="#carouselControls" data-bs-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-
+  </div>
 
   <!-- Footer -->
   <footer>
     <div class="footer-contacts">
-      <p>&copy; 2021 GGICN. All rights reserved.</p>
       <h5>Contact:</h5>
       <p><b>Phone:</b> 03 4257719 or 021 2247483</p>
       <p><b>Email:</b> info@greatergreenisland.nz</p>
       <p><b>Office location:</b> Green Island Police Station, 198 Main South Road, Dunedin</p>
       <p><b>Mailing address:</b> PO Box 13006, Green Island, Dunedin 9052</p>
+      <br />
+      <p>&copy; 2021 GGICN. All rights reserved.</p>
     </div>
   </footer>
 
