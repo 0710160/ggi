@@ -73,6 +73,7 @@ CONTENT
   display: none;
 }
 
+
 /*-----------------------------------------------------------------------------
 ABOUT US
 -----------------------------------------------------------------------------*/
@@ -197,4 +198,33 @@ MEDIA QUERIES: DESKTOP
   .carousel-control-next, .carousel-control-prev {
       filter: invert(100%);
   }
+}
+
+/*-----------------------------------------------------------------------------
+SOCIALS ANIMATIONS
+-----------------------------------------------------------------------------*/
+@keyframes pop-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-4rem) scale(.8);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-icon {
+  animation: pop-in .6s cubic-bezier(0.42, 0, 0.58, 1) forwards;
+  opacity: 0;
+}
+
+.animate-1 {
+  animation-delay: 0.6s;
+}
+.animate-2 {
+  animation-delay: 0.8s;
+}
+.animate-3 {
+  animation-delay: 1s;
 }
