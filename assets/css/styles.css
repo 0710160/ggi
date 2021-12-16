@@ -40,6 +40,7 @@ NAVBAR
   background-color: var(--theme);
   z-index: 1;
   width: 100%;
+  box-shadow: 0 8px 6px -6px rgb(0 0 0 / 20%);
 }
 
 .header-img {
@@ -112,6 +113,10 @@ DIRECTORY
   margin-top: 3%;
 }
 
+.card {
+  margin: 3% 3%;
+}
+
 .card li, .card a {
   font-size: 1.25rem;
   font-weight: 400;
@@ -139,31 +144,6 @@ DIRECTORY
   outline: none;
 }
 
-.card ul li a {
-  position: relative;
-  display: inline-block;
-  color: #000;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: transform 0.5s ease;
-  -webkit-transition: transform 0.5s ease;
-}
-
-.card ul li a:before {
-  position: absolute;
-  top: 100%;
-  content: attr(title);
-  color: green;
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-}
-
-.card ul li:hover a, .card ul li:focus a {
-  -webkit-transform: translateY(-100%);
-  -moz-transform: translateY(-100%);
-  transform: translateY(-100%);
-}
 
 /*-----------------------------------------------------------------------------
 ABOUT US
@@ -292,6 +272,33 @@ MEDIA QUERIES: DESKTOP
   .carousel-control-next, .carousel-control-prev {
     filter: invert(100%);
   }
+
+  .card ul li a {
+    position: relative;
+    display: inline-block;
+    color: #000;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform 0.5s ease;
+    -webkit-transition: transform 0.5s ease;
+  }
+
+  .card ul li a:before {
+    position: absolute;
+    top: 100%;
+    content: attr(title);
+    color: green;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  .card ul li:hover a, .card ul li:focus a {
+    -webkit-transform: translateY(-100%);
+    -moz-transform: translateY(-100%);
+    transform: translateY(-100%);
+  }
+
 }
 
 /*-----------------------------------------------------------------------------
