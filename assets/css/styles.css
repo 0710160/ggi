@@ -1,5 +1,6 @@
 :root {
   --theme: #43883fff;
+  --secondary: #303030;
 }
 
 html, body {
@@ -7,11 +8,23 @@ html, body {
   overflow-x: hidden;
 }
 
-p, a, h5, h1, li {
+/*h1 = Page Heading
+  h2 =
+  h3 = Card titles
+  h4 = Index titles, Hero titles
+  h5 = Carousel titles
+  h6 = Hero subtitle
+*/
+p, a, h5, h6, h1, li {
   font-family: 'Lato', sans-serif;
 }
 
-h4 {
+h3, h6 {
+  font-weight: 500;
+  font-size: 1.25rem;
+}
+
+h3, h4 {
   font-weight: 400;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -21,12 +34,13 @@ h4 {
 NAVBAR
 -----------------------------------------------------------------------------*/
 .navbar {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background-color: var(--theme);
   z-index: 1;
   width: 100%;
+  box-shadow: 0 8px 6px -6px rgb(0 0 0 / 20%);
 }
 
 .header-img {
@@ -73,6 +87,63 @@ CONTENT
   display: none;
 }
 
+/*-----------------------------------------------------------------------------
+EVENTS
+-----------------------------------------------------------------------------*/
+.line-clamp {
+  /*Used to truncate long article lengths */
+  display: -webkit-box;
+  -webkit-line-clamp: 9;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.event-heroes p {
+  font-size: 1.25em;
+}
+
+.img-fluid {
+  max-height: 500px;
+}
+
+/*-----------------------------------------------------------------------------
+DIRECTORY
+-----------------------------------------------------------------------------*/
+.directory-div h4 {
+  margin-top: 3%;
+}
+
+.card {
+  margin: 3% 3%;
+}
+
+.card li, .card a {
+  font-size: 1.25rem;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.card a:link, .card a:visited, .card a:active {
+  color: #000;
+  text-decoration: none;
+}
+
+.card ul {
+  -webkit-padding-start: 0;
+  list-style-type: none;
+}
+
+.card ul li {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.card ul li:hover, .card ul li:focus {
+  outline: none;
+}
+
 
 /*-----------------------------------------------------------------------------
 ABOUT US
@@ -96,7 +167,7 @@ CAROUSEL
 
 .carousel-caption {
   clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
-  background-color: rgba(48,48,48,0.7);
+  background-color: rgba(48, 48, 48, 0.7);
   position: absolute;
   left: 0;
   width: 90%;
@@ -129,16 +200,15 @@ footer p {
 MEDIA QUERIES: DESKTOP
 -----------------------------------------------------------------------------*/
 @media screen and (min-width: 990px) {
-
   h4 {
-    margin-bottom: 2.2rem!important;
+    margin-bottom: 2.2rem !important;
   }
 
   .navbar {
     padding: 0 3%;
   }
 
-  .navbar, .navbar-brand, li, p  {
+  .navbar, .navbar-brand, li, p {
     font-size: 110%;
   }
 
@@ -158,7 +228,7 @@ MEDIA QUERIES: DESKTOP
   .title-text h1 {
     font-size: 4em;
     text-align: center;
-    text-shadow: 2px 2px 4px #303030;
+    text-shadow: 2px 2px 4px var(--secondary);
   }
 
   .mobile-div {
@@ -185,6 +255,10 @@ MEDIA QUERIES: DESKTOP
     justify-content: center;
   }
 
+  .card-div {
+    padding: 3% 10%;
+  }
+
   .carousel-img {
     width: 60%;
   }
@@ -193,11 +267,38 @@ MEDIA QUERIES: DESKTOP
     left: 20%;
     width: 50%;
     padding: 1% 2%;
-}
+  }
 
   .carousel-control-next, .carousel-control-prev {
-      filter: invert(100%);
+    filter: invert(100%);
   }
+
+  .card ul li a {
+    position: relative;
+    display: inline-block;
+    color: #000;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform 0.5s ease;
+    -webkit-transition: transform 0.5s ease;
+  }
+
+  .card ul li a:before {
+    position: absolute;
+    top: 100%;
+    content: attr(title);
+    color: green;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  .card ul li:hover a, .card ul li:focus a {
+    -webkit-transform: translateY(-100%);
+    -moz-transform: translateY(-100%);
+    transform: translateY(-100%);
+  }
+
 }
 
 /*-----------------------------------------------------------------------------
@@ -208,6 +309,7 @@ SOCIALS ANIMATIONS
     opacity: 0;
     transform: translateY(-4rem) scale(.8);
   }
+
   100% {
     opacity: 1;
     transform: none;
@@ -222,9 +324,11 @@ SOCIALS ANIMATIONS
 .animate-1 {
   animation-delay: 0.6s;
 }
+
 .animate-2 {
   animation-delay: 0.8s;
 }
+
 .animate-3 {
   animation-delay: 1s;
 }
