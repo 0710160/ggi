@@ -1,6 +1,7 @@
 :root {
   --theme: #43883fff;
   --secondary: #303030;
+  --bs-gutter-y: 1.5rem;
 }
 
 html, body {
@@ -114,7 +115,7 @@ DIRECTORY
 }
 
 .card {
-  margin: 3% 3%;
+  border: none;
 }
 
 .card li, .card a {
@@ -256,7 +257,7 @@ MEDIA QUERIES: DESKTOP
   }
 
   .card-div {
-    padding: 3% 10%;
+    padding: 3% 8%;
   }
 
   .carousel-img {
@@ -272,6 +273,8 @@ MEDIA QUERIES: DESKTOP
   .carousel-control-next, .carousel-control-prev {
     filter: invert(100%);
   }
+
+  /*---TEXT EFFECTS---*/
 
   .card ul li a {
     position: relative;
