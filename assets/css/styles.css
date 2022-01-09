@@ -176,6 +176,36 @@ CAROUSEL
   text-align: left;
 }
 
+
+/*---------------------------------j-------------------------------------------
+INFORMER
+-----------------------------------------------------------------------------*/
+.article-img {
+  height: 50vh;
+  background: url("../uploads/fruit.jpg") center;
+  background-size: cover;
+}
+
+.article p {
+  white-space: pre-line;
+}
+
+.navigation-icons {
+  z-index: -1;
+}
+
+.nav-left {
+  position: fixed;
+  top: 50vh;
+  left: 3vw;
+}
+
+.nav-right {
+  position: fixed;
+  top: 50vh;
+  right: 3vw;
+}
+
 /*---------------------------------j-------------------------------------------
 FOOTER
 -----------------------------------------------------------------------------*/
@@ -219,6 +249,10 @@ MEDIA QUERIES: DESKTOP
 
   .header-img {
     height: 55vh;
+  }
+
+  .article-img {
+    height: 70vh;
   }
 
   .title-text {
@@ -302,6 +336,9 @@ MEDIA QUERIES: DESKTOP
     transform: translateY(-100%);
   }
 
+  .article {
+    padding: 3vh 15vw;
+  }
 }
 
 /*-----------------------------------------------------------------------------
