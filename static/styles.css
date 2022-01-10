@@ -46,7 +46,7 @@ NAVBAR
 
 .header-img {
   height: 40vh;
-  background: url("../images/playground.jpeg") center;
+  background: url("images/playground.jpeg") center;
   background-size: cover;
 }
 

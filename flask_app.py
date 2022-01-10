@@ -1,20 +1,25 @@
-from flask import Flask, render_template, request, url_for, redirect, flash
+from flask import Flask, render_template, request, url_for, redirect, flash, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
+from flask_wtf import FlaskForm
+from wtforms import StringField, IntegerField, SubmitField
 from sqlalchemy.orm import relationship
-from sqlalchemy.ext.declarative import declarative_base
 from time import time
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.exceptions import HTTPException
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
+from flask_ckeditor import CKEditor, CKEditorField, upload_success, upload_fail
 import os
 import psycopg2
+import bleach
 
 app = Flask(__name__)
+ckeditor = CKEditor(app)
+app.config['CKEDITOR_HEIGHT'] = 500
 
 ## Connect to DB
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", 'sqlite:///timer.db')
-app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "asdflkj")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", 'sqlite:///ggi.db')
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "(*Hh998gaH*(H*98&^")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -27,96 +32,76 @@ login_manager.init_app(app)
 def load_user(user_id):
     return User.query.get(user_id)
 
+## WTForms
+class ArticleForm(FlaskForm):
+    title = StringField('Article title:')
+    subtitle = StringField('Article subtitle:')
+    body = CKEditorField('Article body:')
+    submit = SubmitField()
 
-## User table
+
 class User(UserMixin, db.Model):
-    __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    email = db.Column(db.String(256), unique=True)
-    password = db.Column(db.String)
-    tasks = relationship("TaskList", backref="user", lazy="dynamic")
+    email = db.Column(db.String(256), nullable=False)
+    password = db.Column(db.String(256), nullable=False)
 
 
-## TaskList table to hold all tasks
-class TaskList(db.Model):
-    __tablename__ = 'tasklist'
+class Article(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(256))
-    date_start = db.Column(db.String, default=datetime.today().strftime('%d-%m-%Y'))
-    date_end = db.Column(db.String)
-    hours_spent = db.Column(db.Float)
-    task_start_time = db.Column(db.Float)
-    active = db.Column(db.Boolean, default=False)
-    completed = db.Column(db.Boolean, default=False)
-    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-    note = relationship("Notes", back_populates="task")
+    title = db.Column(db.String(256), nullable=False)
+    subtitle = db.Column(db.String(256))
+    body = db.Column(db.Text, nullable=False)
+    date = db.Column(db.String(256), nullable=False)
+    img_url = db.Column(db.String(250), nullable=False)
+    author = db.Column(db.String(250), nullable=False)
 
 
-## Notes table to hold to-dos and notes associated with each task
-class Notes(db.Model):
+class MailingList(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    task_id = db.Column(db.Integer, db.ForeignKey("tasklist.id"))
-    task = relationship("TaskList", back_populates="note")
-    note = db.Column(db.String)
-    done = db.Column(db.Boolean, default=False)
+    name = db.Column(db.String(256), nullable=False)
+    email = db.Column(db.String(256), nullable=False)
 
 
-db.create_all()
+#db.create_all()
+
+## strips invalid tags/attributes
+def bleach_html(content):
+    allowed_tags = ['a', 'abbr', 'acronym', 'address', 'b', 'br', 'div', 'dl', 'dt',
+                    'em', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr', 'i', 'img',
+                    'li', 'ol', 'p', 'pre', 'q', 's', 'small', 'strike',
+                    'span', 'sub', 'sup', 'table', 'tbody', 'td', 'tfoot', 'th',
+                    'thead', 'tr', 'tt', 'u', 'ul']
+    allowed_attrs = {
+        'a': ['href', 'target', 'title'],
+        'img': ['src', 'alt', 'width', 'height'],
+    }
+    cleaned = bleach.clean(content,
+                           tags=allowed_tags,
+                           attributes=allowed_attrs,
+                           strip=True)
+    return cleaned
 
 
 @app.route("/")
-@login_required
 def home():
-    tasks = current_user.tasks.all()
-    return render_template("index.html", tasks=tasks, current_user=current_user)
-
-
-@app.route("/start/<task_id>")
-def start(task_id):
-    # Starts timer
-    task = TaskList.query.get(task_id)
-    task.active = True
-    task.task_start_time = time()
-    db.session.commit()
-    return redirect(request.referrer)
-
-
-
-@app.route("/end/<task_id>")
-def end(task_id):
-    # Ends timer and adds hours to db
-    task = TaskList.query.get(task_id)
-    task.active = False
-    time_in_hours = (time() - task.task_start_time) / 3600
-    if task.hours_spent is None:
-        task.hours_spent = time_in_hours
-    else:
-        task.hours_spent = float(time_in_hours + task.hours_spent)
-    db.session.commit()
-    return redirect(request.referrer)
-
+    return render_template("index.html")
 
 
 @app.route("/add", methods=["GET", "POST"])
 @login_required
 def add():
+    form = ArticleForm()
     if request.method == "GET":
-        return render_template("add.html")
+        return render_template("add.html", form=form)
     else:
-        new_task_name = request.form["name"]
-        new_task = TaskList(name=new_task_name, user=current_user)
-        db.session.add(new_task)
-        # get hold of new task after adding it to db so assign task_id
-        get_new_task = db.session.query(TaskList).filter_by(name=new_task_name).first()
-        new_task_notes = request.form["note"]
-        if new_task_notes == "":
-            pass
-        else:
-            new_note = Notes(note=new_task_notes, task_id=get_new_task.id)
-            db.session.add(new_note)
+        new_article_title = form.title.data
+        new_article_sub = form.subtitle.data
+        new_article_body = bleach_html(form.body.data)
+        current_date = datetime.today().strftime('%d-%m-%Y')
+        new_article = Article(title=new_article_title, subtitle=new_article_sub, body=new_article_body, date=current_date, author=current_user)
+        db.session.add(new_article)
         db.session.commit()
-        tasks = current_user.tasks.all()
-        return redirect(url_for('home', tasks=tasks, current_user=current_user))
+        return redirect(url_for('home', current_user=current_user))
 
 
 @app.route("/edit/<task_id>", methods=["GET", "POST"])
@@ -148,24 +133,6 @@ def edit(task_id):
     return redirect(url_for('home', tasks=tasks, current_user=current_user))
 
 
-@app.route("/complete/<task_id>")
-def complete(task_id):
-    edit_task = TaskList.query.get(task_id)
-    edit_task.completed = True
-    edit_task.date_end = datetime.today().strftime('%d-%m-%Y')
-    db.session.commit()
-    return redirect(request.referrer)
-
-
-
-@app.route("/note/<task_id>/<note_id>")
-def note(task_id, note_id):
-    edit_note = Notes.query.get(note_id)
-    edit_note.done = not edit_note.done
-    db.session.commit()
-    return redirect(request.referrer)
-
-
 @app.route("/delete/<task_id>")
 def delete(task_id):
     delete_task = TaskList.query.get(task_id)
@@ -195,8 +162,7 @@ def register():
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
-            tasks = current_user.tasks.all()
-            return redirect(url_for('home', tasks=tasks, current_user=current_user))
+            return redirect(url_for('home', current_user=current_user))
 
 
 @app.route('/login', methods=["GET", "POST"])
@@ -214,8 +180,7 @@ def login():
             return redirect(url_for('login'))
         else:
             login_user(user, remember=True)
-            tasks = current_user.tasks.all()
-            return redirect(url_for('home', tasks=tasks, current_user=current_user))
+            return redirect(url_for('home', current_user=current_user))
 
 
 @app.route("/logout")
