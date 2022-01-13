@@ -51,9 +51,8 @@ class Article(db.Model):
     title = db.Column(db.String(256), nullable=False)
     subtitle = db.Column(db.String(256))
     body = db.Column(db.Text, nullable=False)
-    date = db.Column(db.String(256), nullable=False)
-    img_url = db.Column(db.String(250), nullable=False)
-    author = db.Column(db.String(250), nullable=False)
+    date = db.Column(db.String(256))
+    #img_url = db.Column(db.String(250))
 
 
 class MailingList(db.Model):
@@ -62,7 +61,7 @@ class MailingList(db.Model):
     email = db.Column(db.String(256), nullable=False)
 
 
-#db.create_all()
+db.create_all()
 
 ## strips invalid tags/attributes
 def bleach_html(content):
@@ -98,48 +97,49 @@ def add():
         new_article_sub = form.subtitle.data
         new_article_body = bleach_html(form.body.data)
         current_date = datetime.today().strftime('%d-%m-%Y')
-        new_article = Article(title=new_article_title, subtitle=new_article_sub, body=new_article_body, date=current_date, author=current_user)
+        new_article = Article(title=new_article_title, subtitle=new_article_sub, body=new_article_body, date=current_date)
         db.session.add(new_article)
         db.session.commit()
         return redirect(url_for('home', current_user=current_user))
 
 
-@app.route("/edit/<task_id>", methods=["GET", "POST"])
+@app.route("/edit/<article_id>", methods=["GET", "POST"])
 @login_required
-def edit(task_id):
-    edit_task = TaskList.query.get(task_id)
-    notes = db.session.query(Notes).filter_by(task_id=edit_task.id).all()
+def edit(article_id):
+    form = ArticleForm()
+    edit_article = Article.query.get(article_id)
+    form.title(placeholder=edit_article.title)
+    form.subtitle(placeholder=edit_article.subtitle)
+    form.body(placeholder=edit_article.body)
     if request.method == "GET":
-        return render_template("edit.html", task=edit_task, notes=notes)
+        return render_template("edit.html", article=edit_article, form=form)
     else:
-        if request.form["name"] == "":
+        if form.title.data == "":
             pass
         else:
-            new_name = request.form["name"]
-            edit_task.name = new_name
-        if request.form["hours"] == "":
+            title = form.title.data
+            edit_article.title = title
+        if form.subtitle.data == "":
             pass
         else:
-            new_hours = request.form["hours"]
-            edit_task.hours_spent = new_hours
-        if request.form["notes"] == "":
+            subtitle = form.subtitle.data
+            edit_article.body = subtitle
+        if form.body.data == "":
             pass
         else:
-            note = request.form["notes"]
-            new_note = Notes(task_id=task_id, note=note)
-            db.session.add(new_note)
+            body = form.body.data
+            edit_article.body = body
     db.session.commit()
-    tasks = current_user.tasks.all()
-    return redirect(url_for('home', tasks=tasks, current_user=current_user))
+    return redirect(url_for('home', current_user=current_user))
 
 
-@app.route("/delete/<task_id>")
-def delete(task_id):
-    delete_task = TaskList.query.get(task_id)
-    db.session.delete(delete_task)
+@app.route("/delete/<article_id>")
+@login_required
+def delete(article_id):
+    delete_article = Article.query.get(article_id)
+    db.session.delete(delete_article)
     db.session.commit()
-    tasks = current_user.tasks.all()
-    return redirect(url_for('home', tasks=tasks, current_user=current_user))
+    return redirect(url_for('home', current_user=current_user))
 
 
 ## User handling functions
