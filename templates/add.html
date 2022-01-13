@@ -11,16 +11,12 @@
 
 <div class="container article">
     <form action="" method="POST">
-        {{ form.title.label }}
-        {{ form.title(size=80) }}<br>
-        {{ form.subtitle.label }}
-        {{ form.subtitle(size=77) }}<br>
-        {{ form.body.label }}
-        {{ form.body }}<br>
-        {{ form.submit }}
+        <input type="string", style="width:100%;", name="title", placeholder="Article Title"><br>
+        <input type="string", style="width:100%;", name="subtitle", placeholder="Article Subtitle">
+        {{ ckeditor.create() }}
+        <input type="submit">
     </form>
   </div>
 {{ ckeditor.load() }}
-{{ ckeditor.config(name="body") }}
 
 {% endblock %}

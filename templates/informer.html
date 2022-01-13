@@ -1,139 +1,33 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
+{% extends "base.html" %}
+{% block content %}
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Greater Green Island Community Website" />
-  <title>Greater Green Island Informer</title>
-
-  <!-- Bootstrap core CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-  <!-- Favicons -->
-  <link rel="apple-touch-icon" href="assets/images/greatergreenisland.png" sizes="180x180" />
-  <link rel="icon" href="assets/images/greatergreenisland.ico" />
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="assets/css/styles.css">
-</head>
-
-<body>
-
-
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Greater Green Island</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbar">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Informer</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="events.html">Events</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Community Directory
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="businesses.html">Businesses</a></li>
-              <li><a class="dropdown-item" href="groups.html">Groups</a></li>
-              <li><a class="dropdown-item" href="venues.html">Venues</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Projects
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Road Updates</a></li>
-              <li><a class="dropdown-item" href="#">Community Garden</a></li>
-              <li><a class="dropdown-item" href="#">Green Island Shed</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Heading Image -->
-  <div class="container-fluid header-img">
-    <div class="title-text">
-      <h1>Greater Green Island Informer</h1>
-    </div>
+<!-- Heading Image -->
+<div class="container-fluid header-img">
+  <div class="title-text">
+    <h1>{% block title %}Greater Green Island Informer{% endblock %}</h1>
   </div>
+</div>
 
   <!-- Article cards -->
   <div class="container-fluid card-div">
     <div class="row">
 
+      {% for i in articles %}
       <div class="container col-xxl-8">
         <div class="row flex-lg-row align-items-center g-5 py-5">
           <div class="col-10 col-sm-8 col-lg-6">
-            <img src="assets/uploads/fruit.jpg" class="d-block mx-lg-auto img-fluid" width="500" height="350" loading="lazy">
+            <img src="static/images/image3-1.jpg", class="d-block mx-lg-auto img-fluid" width="500" height="350" loading="lazy">
           </div>
           <div class="line-clamp col-lg-6">
-            <h6><a href="article.html">Problem enticing pip fruit staff to stay</a></h6>
-            <p class="lead">How to attract reliable workers has long been an issue for smaller rural communities, and apple growers in the lower have seen how to attract reliable workers has long been an issue for smaller rural communities, and apple growers in the lower have seen...</p>
+            <h5><a href="/informer/{{ i.id }}">{{ i.title }}</a></h5>
+            <h6>{{ i.subtitle }}</h6>
+            <p class="lead">{{ i.body|safe }}</p>
           </div>
         </div>
       </div>
-
-      <div class="container col-xxl-8">
-        <div class="row flex-lg-row align-items-center g-5 py-5">
-          <div class="col-10 col-sm-8 col-lg-6">
-            <img src="assets/uploads/data.jpg" class="d-block mx-lg-auto img-fluid" width="500" height="350" loading="lazy">
-          </div>
-          <div class="line-clamp col-lg-6">
-            <h6>Rise in data usage exciting</h6>
-            <p class="lead">Central Otago has come out ahead of its neighbours in the screen-time stakes - despite its relatively lower population. Latest figures from Chorus show the...</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="container col-xxl-8">
-        <div class="row flex-lg-row align-items-center g-5 py-5">
-          <div class="col-10 col-sm-8 col-lg-6">
-            <img src="assets/uploads/lockdown.jpg" class="d-block mx-lg-auto img-fluid" width="500" height="350" loading="lazy">
-          </div>
-          <div class="line-clamp col-lg-6">
-            <h6>Building consents continue to boom despite lockdowns</h6>
-            <p class="lead">Wanaka's building consent boom is "defying soothsayers", but it would be "crystal ball-gazing" to say how long the trend might continue, Queenstown Lakes District...</p>
-          </div>
-        </div>
-      </div>
-
+      {% endfor %}
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer>
-    <div class="footer-contacts">
-      <h5>Contact:</h5>
-      <p><b>Phone:</b> 03 4257719 or 021 2247483</p>
-      <p><b>Email:</b> info@greatergreenisland.nz</p>
-      <p><b>Office location:</b> Green Island Police Station, 198 Main South Road, Dunedin</p>
-      <p><b>Mailing address:</b> PO Box 13006, Green Island, Dunedin 9052</p>
-      <br />
-      <p>&copy; 2022 GGICN. All rights reserved.</p>
-    </div>
-  </footer>
 
-
-  <!-- JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-</body>
-
-</html>
+{% endblock %}

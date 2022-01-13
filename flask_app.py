@@ -1,9 +1,5 @@
 from flask import Flask, render_template, request, url_for, redirect, flash, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
-from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, SubmitField
-from sqlalchemy.orm import relationship
-from time import time
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.exceptions import HTTPException
@@ -31,13 +27,6 @@ login_manager.init_app(app)
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
-
-## WTForms
-class ArticleForm(FlaskForm):
-    title = StringField('Article title:')
-    subtitle = StringField('Article subtitle:')
-    body = CKEditorField('Article body:')
-    submit = SubmitField()
 
 
 class User(UserMixin, db.Model):
@@ -86,16 +75,83 @@ def home():
     return render_template("index.html")
 
 
-@app.route("/add", methods=["GET", "POST"])
+@app.route("/informer")
+def informer():
+    articles = Article.query.all()
+    return render_template("informer.html", articles=articles)
+
+
+@app.route("/informer/<article_id>")
+def article(article_id):
+    read_article = Article.query.get(article_id)
+    return render_template("article.html", article=read_article)
+
+
+# Article navigation buttons
+@app.route("/next/<article_id>")
+def next_article(article_id):
+    curr_article = Article.query.get(article_id)
+    next_article_id = curr_article.id + 1
+    try:
+        return redirect(article, article_id=next_article_id)
+    except:
+        return redirect(article, article_id=1)
+
+
+@app.route("/previous/<article_id>")
+def previous_article(article_id):
+    curr_article = Article.query.get(article_id)
+    if curr_article.id == 1:
+        pass
+    else:
+        prev_article_id = curr_article.id - 1
+        return redirect(article, article_id=prev_article_id)
+
+
+@app.route("/events")
+def events():
+    return render_template("events.html")
+
+
+@app.route("/businesses")
+def businesses():
+    return render_template("businesses.html")
+
+
+@app.route("/groups")
+def groups():
+    return render_template("groups.html")
+
+
+@app.route("/venues")
+def venues():
+    return render_template("venues.html")
+
+
+@app.route("/roadupdates")
+def roadupdates():
+    return render_template("roadupdates.html")
+
+
+@app.route("/garden")
+def garden():
+    return render_template("garden.html")
+
+
+@app.route("/shed")
+def shed():
+    return render_template("shed.html")
+
+
+@app.route("/add_informer_article", methods=["GET", "POST"])
 @login_required
 def add():
-    form = ArticleForm()
     if request.method == "GET":
-        return render_template("add.html", form=form)
+        return render_template("add.html")
     else:
-        new_article_title = form.title.data
-        new_article_sub = form.subtitle.data
-        new_article_body = bleach_html(form.body.data)
+        new_article_title = request.form["title"]
+        new_article_sub = request.form["subtitle"]
+        new_article_body = bleach_html(request.form.get('ckeditor'))
         current_date = datetime.today().strftime('%d-%m-%Y')
         new_article = Article(title=new_article_title, subtitle=new_article_sub, body=new_article_body, date=current_date)
         db.session.add(new_article)
@@ -106,29 +162,23 @@ def add():
 @app.route("/edit/<article_id>", methods=["GET", "POST"])
 @login_required
 def edit(article_id):
-    form = ArticleForm()
     edit_article = Article.query.get(article_id)
-    form.title(placeholder=edit_article.title)
-    form.subtitle(placeholder=edit_article.subtitle)
-    form.body(placeholder=edit_article.body)
+    article_body = edit_article.body
     if request.method == "GET":
-        return render_template("edit.html", article=edit_article, form=form)
+        return render_template("edit.html", article=edit_article, article_body=article_body)
     else:
-        if form.title.data == "":
+        if request.form["title"] == "":
             pass
         else:
-            title = form.title.data
+            title = request.form["title"]
             edit_article.title = title
-        if form.subtitle.data == "":
+        if request.form["subtitle"] == "":
             pass
         else:
-            subtitle = form.subtitle.data
-            edit_article.body = subtitle
-        if form.body.data == "":
-            pass
-        else:
-            body = form.body.data
-            edit_article.body = body
+            subtitle = request.form["subtitle"]
+            edit_article.subtitle = subtitle
+    body = request.form.get('ckeditor')
+    edit_article.body = body
     db.session.commit()
     return redirect(url_for('home', current_user=current_user))
 

@@ -25,29 +25,29 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Greater Green Island</a>
+        <a class="navbar-brand" href="{{ url_for('home') }}">Greater Green Island</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                    <a class="nav-link active" aria-current="page" href="{{ url_for('home') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="informer.html">Informer</a>
+                    <a class="nav-link" href="{{ url_for('informer') }}">Informer</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="events.html">Events</a>
+                    <a class="nav-link" href="{{ url_for('events') }}">Events</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Community Directory
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="businesses.html">Businesses</a></li>
-                        <li><a class="dropdown-item" href="groups.html">Groups</a></li>
-                        <li><a class="dropdown-item" href="#">Venues</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('businesses') }}">Businesses</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('groups') }}">Groups</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('venues') }}">Venues</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -55,9 +55,9 @@
                         Projects
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Road Updates</a></li>
-                        <li><a class="dropdown-item" href="#">Community Garden</a></li>
-                        <li><a class="dropdown-item" href="#">Green Island Shed</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('roadupdates') }}">Road Updates</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('garden') }}">Community Garden</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('shed') }}">Green Island Shed</a></li>
                     </ul>
                 </li>
             </ul>
@@ -81,5 +81,9 @@
     </div>
 </footer>
 
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
 </body>
+
 </html>
