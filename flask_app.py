@@ -6,7 +6,7 @@ from werkzeug.exceptions import HTTPException
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from flask_ckeditor import CKEditor, CKEditorField, upload_success, upload_fail
 import os
-import psycopg2
+#import psycopg2
 import bleach
 
 app = Flask(__name__)
@@ -91,21 +91,23 @@ def article(article_id):
 @app.route("/next/<article_id>")
 def next_article(article_id):
     curr_article = Article.query.get(article_id)
-    next_article_id = curr_article.id + 1
+    next_article_num = int(curr_article.id + 1)
+    next_article = Article.query.get(next_article_num)
     try:
-        return redirect(article, article_id=next_article_id)
+        return render_template("article.html", article=next_article)
     except:
-        return redirect(article, article_id=1)
+        return render_template("article.html", article=curr_article)
 
 
 @app.route("/previous/<article_id>")
 def previous_article(article_id):
     curr_article = Article.query.get(article_id)
     if curr_article.id == 1:
-        pass
+        return render_template("article.html", article=curr_article)
     else:
-        prev_article_id = curr_article.id - 1
-        return redirect(article, article_id=prev_article_id)
+        prev_article_num = int(curr_article.id - 1)
+        prev_article = Article.query.get(prev_article_num)
+        return render_template("article.html", article=prev_article)
 
 
 @app.route("/events")

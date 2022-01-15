@@ -190,10 +190,6 @@ INFORMER
   white-space: pre-line;
 }
 
-.navigation-icons {
-  z-index: -1;
-}
-
 .nav-left {
   position: fixed;
   top: 50vh;
