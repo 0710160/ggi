@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<!-- Heading Image -->
+<div class="container-fluid header-img">
+    <div class="title-text">
+        <h1>{% block title %}Add New Informer Article{% endblock %}</h1>
+    </div>
+</div>
+
+<div class="container article">
+    <form action="" method="POST">
+        <input type="string", style="width:100%;", name="title", placeholder="Article Title"><br>
+        <input type="string", style="width:100%;", name="subtitle", placeholder="Article Subtitle">
+        {{ ckeditor.create() }}
+        <input type="submit">
+    </form>
+  </div>
+{{ ckeditor.load() }}
+
+{% endblock %}

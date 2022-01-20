@@ -1,152 +1,35 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
+{% extends "base.html" %}
+{% block content %}
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Greater Green Island Community Website" />
-  <title>Welcome to Greater Green Island</title>
-
-  <!-- Bootstrap core CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-  <!-- Favicons -->
-  <link rel="apple-touch-icon" href="assets/images/greatergreenisland.png" sizes="180x180" />
-  <link rel="icon" href="assets/images/greatergreenisland.ico" />
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="assets/css/styles.css">
-</head>
-
-<body>
-
-
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Greater Green Island</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbar">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="informer.html">Informer</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="events.html">Events</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Community Directory
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="businesses.html">Businesses</a></li>
-              <li><a class="dropdown-item" href="groups.html">Groups</a></li>
-              <li><a class="dropdown-item" href="#">Venues</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Projects
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Road Updates</a></li>
-              <li><a class="dropdown-item" href="#">Community Garden</a></li>
-              <li><a class="dropdown-item" href="#">Green Island Shed</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Heading Image -->
-  <div class="container-fluid article-img">
-    <div class="title-text">
-      <h1>Problem enticing pip fruit staff to stay</h1>
-    </div>
+<!-- Heading Image -->
+<div class="container-fluid article-img">
+  <div class="title-text">
+    <h1>{{ article.title }}</h1>
   </div>
+</div>
+
 
   <!-- Left/Right navigation icons -->
+<a href="/previous/{{ article.id }}">
   <div class="navigation-icons nav-left">
     <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#43883fff" class="bi bi-caret-left" viewBox="0 0 16 16">
       <path d="M10 12.796V3.204L4.519 8 10 12.796zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753z" />
     </svg>
   </div>
+  </a>
+
+<a href="/next/{{ article.id }}">
   <div class="navigation-icons nav-right">
     <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#43883fff" class="bi bi-caret-right" viewBox="0 0 16 16">
       <path d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z" />
     </svg>
   </div>
+</a>
 
   <div class='article content container-fluid'>
-    <p>How to attract reliable workers has long been an issue for smaller rural communities, and apple growers in the lower Teviot Valley have seen the problem amplified by the effects of Covid-19.
-
-      Stone fruit growers in Central Otago are relatively comfortable with projected staff numbers for the season, “if everyone turns up” but the problem for apple orchards and pack houses is not only to find workers, but to entice them to stay past
-      the heat of the summer.
-
-      Seasonal Solutions chief executive Helen Axby said most of the clients her firm recruited for in Central Otago were comfortable staff wise.
-
-      “If everyone shows up and we get what numbers we expect to get, we’ll be fine,” she said.
-
-      Ettrick Fruit Growers Association chairman Pete Vernon, who is also the chief executive of Melrose Orchard, said the the situation differed at the lower end of the Teviot Valley.
-
-      The region was too cold for stone fruit, so grew mainly apples, with cherry and other stone fruit orchards starting nearer Roxburgh.
-
-      “Our season is a little different from stone fruit,” he said.
-
-      “We’re still trying to thin apples when the cherry season starts.”
-
-      Mr Vernon said he had about 80% of the staff he required, but had no indication they would remain once the cherry season started fully.
-
-      “I suspect there’ll be no-one anywhere, because [the cherry growers] will mop up everybody if it doesn’t rain.”
-
-      He employed about a dozen staff through the recognised seasonal employer (RSE) scheme but would normally have 20 RSE workers in December, and he hoped to be up to full strength by March for the harvest.
-
-      “We’re still looking for suitable backpackers and New Zealanders that want to work.”
-
-      Ettrick orchardist Mark Darling said border closures had led to a loss of 60,000 to 70,000 backpackers in the workforce, and a it took a long fight before RSE workers “Covid-free people from Covid-free countries” back into New Zealand.
-
-      “We were competing with Australia because the Australian government was giving incentives and bonuses to RSE people that traditionally came here,” he said.
-
-      Toni Birtles has two distinct roles in the fruit industry, growing stone fruit and apples on the 8ha Remarkable Orchards with her husband Sid, and as administration manager for pipfruit business CAJ van der Voort.
-
-      She said it was easier to staff the summer fruit season, but a lot of orchards were offering bonuses if workers stayed all season, meaning increased competition at cherry harvest.
-
-      “With the apples, we have another problem ,” she said.
-
-      “We have to get them [workers] to stay, and we have to attract them into the valley, and it gets cold, because we pack until July.”
-
-      A new group had been formed in the valley as part of the Central Otago District Council joining the national Welcoming Communities programme, looking to help new arrivals settle in and offering social nights, such as movies, sports and other
-      activities.
-
-      Mrs Birtles said that those who enjoyed life in the valley liked to stay as long as possible. Apple growers had an advantage as they could provide continuous work for a much longer time period.</p>
+    <h2>{{ article.subtitle }}</h2>
+    <p>{{ article.body|safe }}
   </div>
 
-  <!-- Footer -->
-  <footer>
-    <div class="footer-contacts">
-      <h5>Contact:</h5>
-      <p><b>Phone:</b> 03 4257719 or 021 2247483</p>
-      <p><b>Email:</b> info@greatergreenisland.nz</p>
-      <p><b>Office location:</b> Green Island Police Station, 198 Main South Road, Dunedin</p>
-      <p><b>Mailing address:</b> PO Box 13006, Green Island, Dunedin 9052</p>
-      <br />
-      <p>&copy; 2022 GGICN. All rights reserved.</p>
-    </div>
-  </footer>
 
-
-  <!-- JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-</body>
-
-</html>
+{% endblock %}
