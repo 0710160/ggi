@@ -150,9 +150,18 @@ DIRECTORY
 ABOUT US
 -----------------------------------------------------------------------------*/
 .about-us {
-  color: white;
-  background-color: var(--theme);
   margin-bottom: 5%;
+  color: white;
+  text-shadow: 1px 1px 2px #303030;
+  background-image: url("images/community.jpg");
+  background-color: var(--theme);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-blend-mode: soft-light;
+}
+
+.about-us p {
+  font-size: 1.25rem;
 }
 
 /*-----------------------------------------------------------------------------
@@ -276,8 +285,8 @@ MEDIA QUERIES: DESKTOP
   }
 
   .about-us {
-    padding: 3% 5%;
-    border-radius: 0 50px;
+    padding: 10%;
+    border-radius: 0 30px;
   }
 
   .d-flex {

@@ -8,6 +8,12 @@
   </div>
 </div>
 
+{% if current_user.is_authenticated %}
+  <div class="row">
+    <a class="btn btn-primary" href="/add">Add new article</a>
+  </div>
+{% endif %}
+
   <!-- Article cards -->
   <div class="container-fluid card-div">
     <div class="row">
@@ -21,6 +27,12 @@
           <div class="line-clamp col-lg-6">
             <h5><a href="/informer/{{ i.id }}">{{ i.title }}</a></h5>
             <h6>{{ i.subtitle }}</h6>
+            {% if current_user.is_authenticated %}
+            <div>
+              <a class="btn btn-primary" href="/edit/{{ i.id}}">Edit article</a>
+              <a class="btn btn-danger" href="/delete/{{ i.id}}">Delete article</a>
+            </div>
+            {% endif %}
             <p class="lead">{{ i.body|safe }}</p>
           </div>
         </div>
