@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+
+  <div class="container col-xxl-8 px-4 py-5 mailing">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+      <div class="col-10 col-sm-8 col-lg-6">
+        <img src="/static/images/content-pixie-PSie8BkuB0w-unsplash.jpg" class="d-block mx-lg-auto img-fluid">
+      </div>
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold lh-1 mb-3">Sign up for our mailing list</h1>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul class=flashes>
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+          <br>
+                <div class="form-action">
+                    <form action="{{ url_for('mailings') }}" method="post">
+                        <input type="text" name="email" placeholder="Email address" required="required", autofocus="True"/>
+                        <input type="text" name="name" placeholder="First name" required="required"/>
+                        <br><br>
+                        <button type="submit" class="btn btn-lg px-4 me-md-2">Sign Up</button>
+                        <a class="btn btn-lg px-4 me-md-2" href="{{ url_for('home') }}">Return Home</a>
+                    </form>
+               </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
