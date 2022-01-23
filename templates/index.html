@@ -49,7 +49,7 @@
           </svg></a>
       </div>
       <div class="col">
-        <a href="#"><svg class="animate-icon animate-3 bi ms-3" viewbox="0 0 24 24" width="50" height="50" fill="#fff">
+        <a href="{{ url_for('mailings') }}"><svg class="animate-icon animate-3 bi ms-3" viewbox="0 0 24 24" width="50" height="50" fill="#fff">
             <use xlink:href="#mailing" />
           </svg></a>
       </div>
@@ -85,12 +85,13 @@
       </div>
       <div class="col-4 contact-row">
         <h4>Join our mailing list</h4>
-        <a href="#"><svg class="animate-icon animate-3 bi ms-3" viewbox="0 0 24 24" width="120" height="120" fill="#43883fff" ;>
+        <a href="{{ url_for('mailings') }}"><svg class="animate-icon animate-3 bi ms-3" viewbox="0 0 24 24" width="120" height="120" fill="#43883fff" ;>
             <use xlink:href="#mailing" />
           </svg></a>
       </div>
     </div>
   </div>
+
 
 
   <!-- Carousel -->
@@ -104,7 +105,7 @@
         <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
       </div>
       <div class="carousel-item active">
-        <a href="#">
+        <a href="{{url_for('playground') }}">
           <div class="d-flex w-100">
             <img src="static/images/playground.jpg" class="carousel-img" alt="...">
             <div class="carousel-caption">
@@ -115,7 +116,7 @@
         </a>
       </div>
       <div class="carousel-item">
-        <a href="#">
+        <a href="{{url_for('things') }}">
           <div class="d-flex w-100">
             <img src="static/images/brighton-beach.jpg" class="carousel-img" alt="...">
             <div class="carousel-caption">

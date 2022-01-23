@@ -58,7 +58,7 @@ NAVBAR
 }
 
 .title-text h1 {
-  font-size: 2em;
+  font-size: 2rem;
   font-weight: 600;
 }
 
@@ -100,7 +100,7 @@ EVENTS
 }
 
 .event-heroes p {
-  font-size: 1.25em;
+  font-size: 1.25rem;
 }
 
 .img-fluid {
@@ -154,8 +154,9 @@ ABOUT US
   color: var(--secondary);
   padding: 8%;
   background-color: #E3E3E3;
-  background-image: url("images/community.jpg");
+  background-image: url("images/network.jpg");
   background-position: center;
+  background-size: cover;
   background-repeat: no-repeat;
   background-blend-mode: soft-light;
 }
@@ -219,6 +220,31 @@ INFORMER
   right: 3vw;
 }
 
+
+/*---------------------------------j-------------------------------------------
+LOGIn
+-----------------------------------------------------------------------------*/
+.login{
+  height: 80vh;
+}
+
+
+/*---------------------------------j-------------------------------------------
+MAILING
+-----------------------------------------------------------------------------*/
+.mailing {
+  height: 80vh;
+}
+
+.mailing h1 {
+  color: var(--theme);
+}
+
+.mailing .btn {
+  color: white;
+  background-color: var(--theme);
+}
+
 /*---------------------------------j-------------------------------------------
 FOOTER
 -----------------------------------------------------------------------------*/
@@ -229,7 +255,6 @@ footer {
   padding-top: 10px;
   padding-bottom: 30px;
   text-align: center;
-  margin-top: 3vh;
 }
 
 .footer-row {
@@ -274,7 +299,7 @@ MEDIA QUERIES: DESKTOP
   }
 
   .title-text h1 {
-    font-size: 4em;
+    font-size: 4rem;
     text-align: center;
     text-shadow: 2px 2px 4px var(--secondary);
   }
@@ -294,7 +319,6 @@ MEDIA QUERIES: DESKTOP
 
   .about-us {
     padding: 10%;
-    border-radius: 0 30px;
   }
 
   .d-flex {

@@ -171,6 +171,34 @@ def garden():
     return render_template("garden.html")
 
 
+@app.route("/playground")
+def playground():
+    return render_template("playground.html")
+
+
+@app.route("/things-to-do")
+def things():
+    return render_template("things-to-do.html")
+
+
+@app.route("/mailing", methods=["GET", "POST"])
+def mailings():
+    if request.method == "GET":
+        return render_template("mailing.html")
+    else:
+        name = request.form["name"]
+        email = request.form["email"]
+        new_mailing = MailingList(email=email, name=name)
+        if MailingList.query.filter_by(email=email).first():
+            flash("You're already signed up!")
+            return render_template("mailing.html")
+        else:
+            db.session.add(new_mailing)
+            db.session.commit()
+            flash("Thanks for signing up!")
+            return render_template("mailing.html")
+
+
 @app.route("/shed")
 def shed():
     return render_template("shed.html")
