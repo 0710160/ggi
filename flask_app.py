@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, url_for, redirect, flash, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
-#from flask_migrate import Migrate
+# from flask_migrate import Migrate
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.exceptions import HTTPException
@@ -8,18 +8,18 @@ from werkzeug.utils import secure_filename
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from flask_ckeditor import CKEditor, CKEditorField, upload_success, upload_fail
 import os
-#import psycopg2
+# import psycopg2
 import bleach
 
 ## Define folder for image uploads
-UPLOAD_FOLDER = '/static/uploads'
+UPLOAD_FOLDER = 'static/uploads/'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
 ckeditor = CKEditor(app)
 app.config['CKEDITOR_HEIGHT'] = 500
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "(*Hh998gaH*(H*98&^")
 
 ##TODO: comment SQLlite, uncomment MySQL, Migrate(app, db) and flask_migrate import before publishing
@@ -27,7 +27,6 @@ app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "(*Hh998gaH*(H*98&^")
 ## Connect to SQLlite
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", 'sqlite:///ggi.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
 
 ## Connect to PythonAnywhere MySQL
 '''
@@ -43,11 +42,12 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 '''
 
 db = SQLAlchemy(app)
-#migrate = Migrate(app, db)
+# migrate = Migrate(app, db)
 
 ## Flask login manager
 login_manager = LoginManager()
 login_manager.init_app(app)
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -66,7 +66,7 @@ class Article(db.Model):
     subtitle = db.Column(db.String(256))
     body = db.Column(db.Text, nullable=False)
     date = db.Column(db.String(256))
-    #img_url = db.Column(db.String(250))
+    img_name = db.Column(db.String(250))
 
 
 class MailingList(db.Model):
@@ -81,7 +81,6 @@ class MailingList(db.Model):
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
 
 
 ## strips invalid tags/attributes
@@ -214,7 +213,9 @@ def add():
         new_article_sub = request.form["subtitle"]
         new_article_body = bleach_html(request.form.get('ckeditor'))
         current_date = datetime.today().strftime('%d-%m-%Y')
-        new_article = Article(title=new_article_title, subtitle=new_article_sub, body=new_article_body, date=current_date)
+        img_name = "null"
+        new_article = Article(title=new_article_title, subtitle=new_article_sub, body=new_article_body,
+                              date=current_date, img_name=img_name)
         db.session.add(new_article)
         db.session.commit()
         return redirect(url_for('upload_file', current_user=current_user))
@@ -232,23 +233,26 @@ def upload_file():
         file = request.files['file']
         # if user does not select a file, browser submits empty part without filename
         if file.filename == '':
-            flash('No file selected')
+            flash('No file selected for uploading')
             return redirect(request.url)
         if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            #article_id = Article.query.order_by(Article.id).first()
-            #filename = secure_filename(article_id)
-            #file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            file_path = str(app.config['UPLOAD_FOLDER'] + '/')
-            file.save(os.path.join(file_path, filename))
-            #return redirect(url_for('add', current_user=current_user))
-            return redirect(url_for('download_file', name=filename, current_user=current_user))
+            orig_filename = secure_filename(file.filename)
+            orig_extn = orig_filename.split(".")[1]
+            descending = Article.query.order_by(Article.id.desc())
+            last_article = descending.first()
+            filename = f'informer{last_article.id}.{orig_extn}'
+            last_article.img_name = filename
+            db.session.commit()
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            print('upload_image filename: ' + filename)
+            #flash('Image successfully uploaded and displayed below. You may now return home.')
+            return redirect(url_for('informer', current_user=current_user))
 
 
-##TODO: delete this function?
-@app.route("/uploads/<name>")
-def download_file(name):
-    return send_from_directory(app.config["UPLOAD_FOLDER"], name)
+@app.route('/display/<filename>')
+def display_image(filename):
+    print('display_image filename: ' + filename)
+    return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
 
 @app.route("/edit/<article_id>", methods=["GET", "POST"])

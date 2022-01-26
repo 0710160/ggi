@@ -10,7 +10,7 @@
 
 {% if current_user.is_authenticated %}
   <div class="row">
-    <a class="btn btn-primary" href="/add">Add new article</a>
+    <a class="btn btn-primary" href="{{ url_for('add') }}">Add new article</a>
   </div>
 {% endif %}
 
@@ -22,7 +22,7 @@
       <div class="container col-xxl-8">
         <div class="row flex-lg-row align-items-center g-5 py-5">
           <div class="col-10 col-sm-8 col-lg-6">
-            <img src="static/images/image3-1.jpg", class="d-block mx-lg-auto img-fluid" width="500" height="350" loading="lazy">
+            <img src="static/uploads/{{ i.img_name }}", class="d-block mx-lg-auto img-fluid" width="500" height="350" loading="lazy">
           </div>
           <div class="line-clamp col-lg-6">
             <h5><a href="/informer/{{ i.id }}">{{ i.title }}</a></h5>
