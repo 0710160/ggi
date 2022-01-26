@@ -200,8 +200,9 @@ INFORMER
 -----------------------------------------------------------------------------*/
 .article-img {
   height: 50vh;
-  background: url("../uploads/fruit.jpg") center;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .article p {
