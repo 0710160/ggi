@@ -70,13 +70,22 @@ class Article(db.Model):
     img_name = db.Column(db.String(250))
 
 
+class Events(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    title = db.Column(db.String(256), nullable=False)
+    subtitle = db.Column(db.String(256))
+    body = db.Column(db.Text, nullable=False)
+    date = db.Column(db.String(256))
+    img_name = db.Column(db.String(250))
+
+
 class MailingList(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(256), nullable=False)
     email = db.Column(db.String(256), nullable=False)
 
 
-#db.create_all()
+db.create_all()
 
 
 def allowed_file(filename):
@@ -141,46 +150,6 @@ def previous_article(article_id):
         return render_template("article.html", article=prev_article)
 
 
-@app.route("/events")
-def events():
-    return render_template("events.html")
-
-
-@app.route("/businesses")
-def businesses():
-    return render_template("businesses.html")
-
-
-@app.route("/groups")
-def groups():
-    return render_template("groups.html")
-
-
-@app.route("/venues")
-def venues():
-    return render_template("venues.html")
-
-
-@app.route("/roadupdates")
-def roadupdates():
-    return render_template("roadupdates.html")
-
-
-@app.route("/garden")
-def garden():
-    return render_template("garden.html")
-
-
-@app.route("/playground")
-def playground():
-    return render_template("playground.html")
-
-
-@app.route("/things-to-do")
-def things():
-    return render_template("things-to-do.html")
-
-
 @app.route("/mailing", methods=["GET", "POST"])
 def mailings():
     if request.method == "GET":
@@ -199,9 +168,22 @@ def mailings():
             return render_template("mailing.html")
 
 
-@app.route("/shed")
-def shed():
-    return render_template("shed.html")
+@app.route("/add_event", methods=["GET", "POST"])
+@login_required
+def add_event():
+    if request.method == "GET":
+        return render_template("add.html")
+    else:
+        new_event_title = request.form["title"]
+        new_event_subtitle = request.form["subtitle"]
+        new_event_body = bleach_html(request.form.get('ckeditor'))
+        current_date = datetime.today().strftime('%d-%m-%Y')
+        img_name = "null"
+        new_event = Events(title=new_event_title, subtitle=new_event_subtitle, body=new_event_body,
+                           date=current_date, img_name=img_name)
+        db.session.add(new_event)
+        db.session.commit()
+        return redirect(url_for('upload_file', current_user=current_user))
 
 
 @app.route("/add_informer_article", methods=["GET", "POST"])
@@ -245,8 +227,7 @@ def upload_file():
             last_article.img_name = new_filename
             db.session.commit()
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], new_filename))
-            print('upload_image filename: ' + new_filename)
-            #flash('Image successfully uploaded and displayed below. You may now return home.')
+            #print('upload_image filename: ' + new_filename)
             return redirect(url_for('informer', current_user=current_user))
 
 
@@ -287,6 +268,51 @@ def delete(article_id):
     db.session.delete(delete_article)
     db.session.commit()
     return redirect(url_for('informer', current_user=current_user))
+
+
+@app.route("/events")
+def events():
+    return render_template("events.html", events=Events.query.all())
+
+
+@app.route("/shed")
+def shed():
+    return render_template("shed.html")
+
+
+@app.route("/businesses")
+def businesses():
+    return render_template("businesses.html")
+
+
+@app.route("/groups")
+def groups():
+    return render_template("groups.html")
+
+
+@app.route("/venues")
+def venues():
+    return render_template("venues.html")
+
+
+@app.route("/roadupdates")
+def roadupdates():
+    return render_template("roadupdates.html")
+
+
+@app.route("/garden")
+def garden():
+    return render_template("garden.html")
+
+
+@app.route("/playground")
+def playground():
+    return render_template("playground.html")
+
+
+@app.route("/things-to-do")
+def things():
+    return render_template("things-to-do.html")
 
 
 ## User handling functions

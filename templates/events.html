@@ -1,118 +1,68 @@
 {% extends "base.html" %}
 {% block content %}
 
-  <!-- Heading Image -->
-  <div class="container-fluid header-img">
-    <div class="title-text">
-      <h1>Greater Green Island Events</h1>
-    </div>
+<!-- Heading Image -->
+<div class="container-fluid header-img">
+  <div class="title-text">
+    <h1>{% block title %}Greater Green Island Events{% endblock %}</h1>
   </div>
+</div>
+
+{% if current_user.is_authenticated %}
+<div class="row">
+  <a class="btn btn-primary" href="{{ url_for('add_event') }}">Add new event</a>
+</div>
+{% endif %}
 
   <!-- Heroes -->
+  {% for i in events %}
+
+  {% if i.id % 2 == 0 %}
   <div class="event-heroes container col-xxl-8 px-4 py-5">
-    <h4 class="mb-4">Second Day of Christmas (11th December) Clue</h4>
+    <h5><a href="/informer/{{ i.id }}">{{ i.title }}</a></h5>
+    <h6>{{ i.subtitle }}</h6>
     <div class="row flex-lg-row-reverse align-items-top">
       <div class="col-10 col-sm-8 col-lg-6">
-        <img src="assets/uploads/12days-2.png" class="d-block mx-lg-auto img-fluid" width="700" height="500" loading="lazy">
+        <img src="static/uploads/{{ i.img_name }}", class="d-block mx-lg-auto img-fluid" width="500" height="350" loading="lazy">
       </div>
       <div class="line-clamp col-lg-6">
-        <h6>Clue: Did you know Fairfield Skate Park is a smoke free area?</h6>
-        <p class="lead">First person to email a photo of today's letter to 12days@greatergreenisland.nz will receive a 12 Days of Christmas token and a stainless steel drink bottle.
-          We have hidden 13 letters of a mystery phrase in 12 locations around Greater Green Island. Using our daily clues we want you to get out and find the letters, then send us a photo of them. Come back tomorrow 9am for another clue to a new
-          location!
-          Clues released on GGICN Facebook page, GGICN12days on Instagram and at <a href="https://greatergreenisland.nz/projects/list/19">https://greatergreenisland.nz/projects/list/19</a></p>
+        {% if current_user.is_authenticated %}
+        <div>
+          <a class="btn btn-primary" href="/edit/{{ i.id}}">Edit article</a>
+          <a class="btn btn-danger" href="/delete/{{ i.id}}">Delete article</a>
+        </div>
+        {% endif %}
+        <p class="lead">{{ i.body|safe }}</p>
         <div class="d-grid gap-2 d-md-flex justify-content-md-start">
         </div>
       </div>
     </div>
   </div>
   <hr />
-
-  <!-- ALTERNATE HERO PICTURE POSITIONING BY USING JINJA MATH %2==0 -->
-  <div class="event-heroes container col-xxl-8 px-4 py-5">
-    <h4 class="mb-4">First Day of Christmas (10th December) Clue</h4>
-    <div class="row flex-lg-row align-items-top">
-      <div class="col-10 col-sm-8 col-lg-6">
-        <img src="assets/uploads/12days-1.png" class="d-block mx-lg-auto img-fluid" width="700" height="500" loading="lazy">
+{% else %}
+  <!-- ALTERNATING HERO PICTURE POSITIONING -->
+<div class="event-heroes container col-xxl-8 px-4 py-5">
+  <h4 class="mb-4">{{ i.title }}</h4>
+  <div class="row flex-lg-row align-items-top">
+    <div class="col-10 col-sm-8 col-lg-6">
+      <img src="static/uploads/{{ i.img_name }}", class="d-block mx-lg-auto img-fluid" width="500" height="350" loading="lazy">
+    </div>
+    <div class="line-clamp col-lg-6">
+      {% if current_user.is_authenticated %}
+      <div>
+        <a class="btn btn-primary" href="/edit/{{ i.id}}">Edit article</a>
+        <a class="btn btn-danger" href="/delete/{{ i.id}}">Delete article</a>
       </div>
-      <div class="line-clamp col-lg-6">
-        <h6>CLUE: As you wander down Shand Street you will find a little garden that will astound your mind. If you look carefully you will spy more than just the growing Kai. Remember: Take only photos and leave only footprints as you close the gate
-          behind on your departure</h6>
-        <p class="lead">First person to email a photo of today's letter to 12days@greatergreenisland.nz will receive a 12 Days of Christmas token and a $20 Biggies Pizza voucher.
-          We have hidden 13 letters of a mystery phrase in 12 locations around Greater Green Island. Using our daily clues we want you to get out and find the letters, then send us a photo of them. Come back tomorrow 9am for another clue to a new
-          location!
-          Clues released on GGICN Facebook page, GGICN12days on Instagram and at <a href="https://greatergreenisland.nz/projects/list/19">https://greatergreenisland.nz/projects/list/19</a></p>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-        </div>
+      {% endif %}
+      <p class="lead">{{ i.body|safe }}</p>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-start">
       </div>
     </div>
   </div>
-  <hr />
-
-  <div class="event-heroes container col-xxl-8 px-4 py-5">
-    <h4 class="mb-4">12 Days of Christmas - Community Treasure Hunt Information</h4>
-    <div class="row flex-lg-row-reverse align-items-top">
-      <div class="col-10 col-sm-8 col-lg-6">
-        <img src="assets/uploads/12days-1.png" class="d-block mx-lg-auto img-fluid" width="700" height="500" loading="lazy">
-      </div>
-      <div class="line-clamp col-lg-6">
-        <h6>12 Days of Christmas Greater Green Island Community treasure Hunt 10th 21st December</h6>
-        <p class="lead">Between 10th and 21st December GGICN will hide 13 letters in 12 locations around the Greater Green Island community.
-          Each day a clue will be revealed to lead you to a new location, with different letters. When the letters are unscrambled, the letters will create a secret Christmas phrase.
-          Your job: Solve the clues, photograph the hidden letters, get the prize!
-          Send your photos through to 12days@greatergreenisland.nz or message the GGICN Facebook page.
-          Missed a day? No worries! Letters will remain in place the duration of the event so you can go back to earlier locations to hunt down the letters.
-          Clues will be released in three places:
-        <ul>
-          <li> Greater Green Island Facebook page </li>
-          <li>Instagram @ggicn12days </li>
-          <li> https://greatergreenisland.nz/projects/list/19 </li>
-        </ul>
-        The the three ways to win include:
-        <ul>
-          <li> 1. Be the first person to email or Facebook message us a photo of the letter at the most recently revealed location. </li>
-          <li> 2. Take a photo of all 13 letters, in the 12 locations and email them through to us. </li>
-          <li> 3. Unscramble the Christmas phrase and send that through to us for your chance at another spot prize. </li>
-        </ul>
-        Prizes have been kindly donated by:
-        <ul>
-          <li> Royal Albatross and Fort pass </li>
-          <li> Biggies pizza </li>
-          <li> Beachlands speedway tickets </li>
-          <li>Leap Dunedin entry</li>
-          <li> Olveston Historic Home tour</li>
-          <li> Dunedin Gasworks Museum tickets </li>
-          <li> Escape Dunedin </li>
-        </ul>
-        </p>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-        </div>
-      </div>
-    </div>
-  </div>
-  <hr />
-
-  <div class="event-heroes container col-xxl-8 px-4 py-5">
-    <h4 class="mb-4">Greater Green Island Get Together 2020</h4>
-    <div class="row flex-lg-row align-items-top">
-      <div class="col-10 col-sm-8 col-lg-6">
-        <img src="assets/uploads/ggi-get-together.jpg" class="d-block mx-lg-auto img-fluid" width="700" height="500" loading="lazy">
-      </div>
-      <div class="line-clamp col-lg-6">
-        <h6>A free community expo to celebrate our local clubs, groups and education providers. Register now.</h6>
-        <p class="lead">Sign up to have an information/activity stall here: <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSeRQgx0PTAPuhhAiggK1wUXsS2uo5-0K3nCJwWSyN6Eo08TAQ/viewform?usp=sf_link">https://docs.google.com/forms/d/e/1FAIpQLSeRQgx0PTAPuhhAiggK1wUXsS2uo5-0K3nCJwWSyN6Eo08TAQ/viewform?usp=sf_link</a>
-          This event is a celebration of all the clubs and groups in Abbotsford, Brighton, Burnside, Concord, Fairfield, Green Island, Waldronville, Ocean View and Westwood.
-          No cost for not for profit groups/clubs and organisations. Please use this opportunity to showcase your group with a free activity, flyers and displays. The last Greater Green Island Community Get Together had around 2,500 people attending.
-          Please note you will need to supply your own table - maximum size 2metres long please. We have plenty of chairs.
-          The Greater Green Island Get Together will be held on Saturday 21 November, 12pm-3pm at the Dunedin City Baptist Church Building, 19 Main South Road, Concord.
-          If you have any queries please contact Larna McCarthy on greatergreenislandcommunity@gmail.com.</p>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-        </div>
-      </div>
-    </div>
-  </div>
-  <hr />
+</div>
+<hr />
+{% endif %}
+{% endfor %}
 
 
 {% endblock %}
