@@ -28,8 +28,8 @@
       <div class="line-clamp col-lg-6">
         {% if current_user.is_authenticated %}
         <div>
-          <a class="btn btn-primary" href="/edit/{{ i.id}}">Edit article</a>
-          <a class="btn btn-danger" href="/delete/{{ i.id}}">Delete article</a>
+          <a class="btn btn-primary" href="/edit_event/{{ i.id}}">Edit event</a>
+          <a class="btn btn-danger" href="/delete_event/{{ i.id}}">Delete event</a>
         </div>
         {% endif %}
         <p class="lead">{{ i.body|safe }}</p>
@@ -50,8 +50,8 @@
     <div class="line-clamp col-lg-6">
       {% if current_user.is_authenticated %}
       <div>
-        <a class="btn btn-primary" href="/edit/{{ i.id}}">Edit article</a>
-        <a class="btn btn-danger" href="/delete/{{ i.id}}">Delete article</a>
+        <a class="btn btn-primary" href="/edit_event/{{ i.id}}">Edit event</a>
+        <a class="btn btn-danger" href="/delete_event/{{ i.id}}">Delete event</a>
       </div>
       {% endif %}
       <p class="lead">{{ i.body|safe }}</p>

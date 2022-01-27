@@ -116,38 +116,6 @@ def home():
     return render_template("index.html")
 
 
-@app.route("/informer")
-def informer():
-    return render_template("informer.html", articles=Article.query.all())
-
-
-@app.route("/informer/<article_id>")
-def article(article_id):
-    read_article = Article.query.get(article_id)
-    return render_template("article.html", article=read_article)
-
-
-# Article navigation buttons
-@app.route("/next/<article_id>")
-def next_article(article_id):
-    curr_article = Article.query.get(article_id)
-    next_article_num = int(curr_article.id + 1)
-    next_article = Article.query.get(next_article_num)
-    try:
-        return render_template("article.html", article=next_article)
-    except:
-        return render_template("article.html", article=curr_article)
-
-
-@app.route("/previous/<article_id>")
-def previous_article(article_id):
-    curr_article = Article.query.get(article_id)
-    if curr_article.id == 1:
-        return render_template("article.html", article=curr_article)
-    else:
-        prev_article_num = int(curr_article.id - 1)
-        prev_article = Article.query.get(prev_article_num)
-        return render_template("article.html", article=prev_article)
 
 
 @app.route("/mailing", methods=["GET", "POST"])
@@ -168,22 +136,17 @@ def mailings():
             return render_template("mailing.html")
 
 
-@app.route("/add_event", methods=["GET", "POST"])
-@login_required
-def add_event():
-    if request.method == "GET":
-        return render_template("add.html")
-    else:
-        new_event_title = request.form["title"]
-        new_event_subtitle = request.form["subtitle"]
-        new_event_body = bleach_html(request.form.get('ckeditor'))
-        current_date = datetime.today().strftime('%d-%m-%Y')
-        img_name = "null"
-        new_event = Events(title=new_event_title, subtitle=new_event_subtitle, body=new_event_body,
-                           date=current_date, img_name=img_name)
-        db.session.add(new_event)
-        db.session.commit()
-        return redirect(url_for('upload_file', current_user=current_user))
+## ADD, UPLOAD, EDIT, DELETE INFORMER ARTICLES
+@app.route("/informer")
+def informer():
+    desc_articles = Article.query.order_by(Article.id.desc())
+    return render_template("informer.html", articles=desc_articles)
+
+
+@app.route("/informer/<article_id>")
+def article(article_id):
+    read_article = Article.query.get(article_id)
+    return render_template("article.html", article=read_article)
 
 
 @app.route("/add_informer_article", methods=["GET", "POST"])
@@ -201,13 +164,14 @@ def add():
                               date=current_date, img_name=img_name)
         db.session.add(new_article)
         db.session.commit()
-        return redirect(url_for('upload_file', current_user=current_user))
+        return redirect(url_for('upload_informer', current_user=current_user))
 
 
-@app.route("/upload", methods=["GET", "POST"])
-def upload_file():
+@app.route("/upload_informer", methods=["GET", "POST"])
+@login_required
+def upload_informer():
     if request.method == 'GET':
-        return render_template('upload.html')
+        return render_template('upload_informer.html')
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -230,11 +194,6 @@ def upload_file():
             #print('upload_image filename: ' + new_filename)
             return redirect(url_for('informer', current_user=current_user))
 
-
-@app.route('/display/<filename>')
-def display_image(filename):
-    print('display_image filename: ' + filename)
-    return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
 
 @app.route("/edit/<article_id>", methods=["GET", "POST"])
@@ -268,6 +227,118 @@ def delete(article_id):
     db.session.delete(delete_article)
     db.session.commit()
     return redirect(url_for('informer', current_user=current_user))
+
+
+# Article navigation buttons
+@app.route("/next/<article_id>")
+def next_article(article_id):
+    curr_article = Article.query.get(article_id)
+    if curr_article.id == 1:
+        return render_template("article.html", article=curr_article)
+    else:
+        next_article_num = int(curr_article.id - 1)
+        next_article = Article.query.get(next_article_num)
+        return render_template("article.html", article=next_article)
+
+
+@app.route("/previous/<article_id>")
+def previous_article(article_id):
+    curr_article = Article.query.get(article_id)
+    descending = Article.query.order_by(Article.id.desc())
+    last_article = descending.first()
+    if curr_article == last_article:
+        return render_template("article.html", article=curr_article)
+    else:
+        prev_article_num = int(curr_article.id + 1)
+        prev_article = Article.query.get(prev_article_num)
+        return render_template("article.html", article=prev_article)
+
+
+## ADD, UPLOAD, EDIT, DELETE EVENTS
+@app.route("/add_event", methods=["GET", "POST"])
+@login_required
+def add_event():
+    if request.method == "GET":
+        return render_template("add.html")
+    else:
+        new_event_title = request.form["title"]
+        new_event_subtitle = request.form["subtitle"]
+        new_event_body = bleach_html(request.form.get('ckeditor'))
+        current_date = datetime.today().strftime('%d-%m-%Y')
+        img_name = "null"
+        new_event = Events(title=new_event_title, subtitle=new_event_subtitle, body=new_event_body,
+                           date=current_date, img_name=img_name)
+        db.session.add(new_event)
+        db.session.commit()
+
+        return redirect(url_for('upload_event', current_user=current_user))
+
+
+@app.route("/upload_event", methods=["GET", "POST"])
+@login_required
+def upload_event():
+    if request.method == 'GET':
+        return render_template('upload_event.html')
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # if user does not select a file, browser submits empty part without filename
+        if file.filename == '':
+            flash('No file selected for uploading')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            orig_filename = secure_filename(file.filename)
+            orig_extn = orig_filename.split(".")[1]
+            descending = Events.query.order_by(Events.id.desc())
+            last_article = descending.first()
+            new_filename = f'event{last_article.id}.{orig_extn}'
+            last_article.img_name = new_filename
+            db.session.commit()
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], new_filename))
+            #print('upload_image filename: ' + new_filename)
+            return redirect(url_for('events', current_user=current_user))
+
+
+@app.route("/edit_event/<event_id>", methods=["GET", "POST"])
+@login_required
+def edit_event(event_id):
+    edit_article = Events.query.get(event_id)
+    article_body = edit_article.body
+    if request.method == "GET":
+        return render_template("edit.html", article=edit_article, article_body=article_body)
+    else:
+        if request.form["title"] == "":
+            pass
+        else:
+            title = request.form["title"]
+            edit_article.title = title
+        if request.form["subtitle"] == "":
+            pass
+        else:
+            subtitle = request.form["subtitle"]
+            edit_article.subtitle = subtitle
+    body = request.form.get('ckeditor')
+    edit_article.body = body
+    db.session.commit()
+    return redirect(url_for('events', current_user=current_user))
+
+
+@app.route("/delete_event/<event_id>")
+@login_required
+def delete_event(event_id):
+    delete_article = Events.query.get(event_id)
+    db.session.delete(delete_article)
+    db.session.commit()
+    return redirect(url_for('events', current_user=current_user))
+
+
+@app.route('/display/<filename>')
+def display_image(filename):
+    print('display_image filename: ' + filename)
+    return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
 
 @app.route("/events")
