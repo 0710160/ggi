@@ -58,7 +58,7 @@ NAVBAR
 }
 
 .title-text h1 {
-  font-size: 2em;
+  font-size: 2rem;
   font-weight: 600;
 }
 
@@ -100,7 +100,7 @@ EVENTS
 }
 
 .event-heroes p {
-  font-size: 1.25em;
+  font-size: 1.25rem;
 }
 
 .img-fluid {
@@ -150,14 +150,28 @@ DIRECTORY
 ABOUT US
 -----------------------------------------------------------------------------*/
 .about-us {
-  color: white;
-  background-color: var(--theme);
-  margin-bottom: 5%;
+  margin-top: 5%;
+  color: var(--secondary);
+  padding: 8%;
+  background-color: #E3E3E3;
+  background-image: url("images/network.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-blend-mode: soft-light;
+}
+
+.about-us p {
+  font-size: 1.1rem;
 }
 
 /*-----------------------------------------------------------------------------
 CAROUSEL
 -----------------------------------------------------------------------------*/
+.carousel-section {
+  margin: 5% 0;
+}
+
 .carousel-section h4 {
   margin-left: 5%;
 }
@@ -176,14 +190,39 @@ CAROUSEL
   text-align: left;
 }
 
+.carousel-control-next-icon, .carousel-control-prev-icon {
+  width: 6rem;
+  height: 6rem;
+}
 
-/*---------------------------------j-------------------------------------------
+/*----------------------------------------------------------------------------
+CARDS (TO REPLACE CAROUSEL ON DESKTOP)
+-----------------------------------------------------------------------------*/
+.box-row {
+   padding: 0 10%;
+}
+
+.box-card {
+  border-radius: 10px 10px 0 0;
+}
+
+.box-row h4 {
+  margin: 5% auto 2% auto;
+  text-align: center;
+}
+
+.box-row p {
+  margin: 0 2%;
+}
+
+/*----------------------------------------------------------------------------
 INFORMER
 -----------------------------------------------------------------------------*/
 .article-img {
   height: 50vh;
-  background: url("../uploads/fruit.jpg") center;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .article p {
@@ -202,7 +241,32 @@ INFORMER
   right: 3vw;
 }
 
-/*---------------------------------j-------------------------------------------
+
+/*----------------------------------------------------------------------------
+LOGIN
+-----------------------------------------------------------------------------*/
+.login{
+  height: 80vh;
+}
+
+
+/*----------------------------------------------------------------------------
+MAILING
+-----------------------------------------------------------------------------*/
+.mailing {
+  height: 80vh;
+}
+
+.mailing h1 {
+  color: var(--theme);
+}
+
+.mailing .btn {
+  color: white;
+  background-color: var(--theme);
+}
+
+/*----------------------------------------------------------------------------
 FOOTER
 -----------------------------------------------------------------------------*/
 footer {
@@ -212,7 +276,6 @@ footer {
   padding-top: 10px;
   padding-bottom: 30px;
   text-align: center;
-  margin-top: 3vh;
 }
 
 .footer-row {
@@ -257,7 +320,7 @@ MEDIA QUERIES: DESKTOP
   }
 
   .title-text h1 {
-    font-size: 4em;
+    font-size: 4rem;
     text-align: center;
     text-shadow: 2px 2px 4px var(--secondary);
   }
@@ -271,13 +334,16 @@ MEDIA QUERIES: DESKTOP
   }
 
   .contact-row {
-    padding: 2%;
+  margin: 0 7% 5% 7%;
+  }
+
+  .contact-col {
+    padding: 3%;
     text-align: center;
   }
 
   .about-us {
-    padding: 3% 5%;
-    border-radius: 0 50px;
+    padding: 10%;
   }
 
   .d-flex {
@@ -298,6 +364,10 @@ MEDIA QUERIES: DESKTOP
     left: 20%;
     width: 50%;
     padding: 1% 2%;
+  }
+
+  .carousel-caption p {
+    font-size: 100%;
   }
 
   .carousel-control-next, .carousel-control-prev {

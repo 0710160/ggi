@@ -14,9 +14,10 @@
         <input type="string", style="width:100%;", name="title", placeholder="Article Title"><br>
         <input type="string", style="width:100%;", name="subtitle", placeholder="Article Subtitle">
         {{ ckeditor.create() }}
+        <h3>Click 'Submit' to proceed to header image upload</h3>
         <input type="submit">
     </form>
-  </div>
+</div>
 {{ ckeditor.load() }}
 
 {% endblock %}

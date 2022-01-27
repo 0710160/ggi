@@ -49,7 +49,7 @@
           </svg></a>
       </div>
       <div class="col">
-        <a href="#"><svg class="animate-icon animate-3 bi ms-3" viewbox="0 0 24 24" width="50" height="50" fill="#fff">
+        <a href="{{ url_for('mailings') }}"><svg class="animate-icon animate-3 bi ms-3" viewbox="0 0 24 24" width="50" height="50" fill="#fff">
             <use xlink:href="#mailing" />
           </svg></a>
       </div>
@@ -58,8 +58,8 @@
 
   <!-- Desktop Contact & Socials -->
   <div class="container desktop-contacts">
-    <div class="row justify-content-evenly">
-      <div class="col-4 contact-row">
+    <div class="row contact-row justify-content-evenly">
+      <div class="col-4 contact-col">
         <h4>Find us on social media</h4>
         <div class="row justify-content-evenly">
           <div class="col-4">
@@ -74,7 +74,7 @@
           </div>
         </div>
       </div>
-      <div class="col-4 contact contact-row">
+      <div class="col-4 contact contact-col">
         <h4>Get in touch with us</h4>
         <ul>
           <li><b>Phone:</b> 03 4257719 or 021 2247483</li>
@@ -83,9 +83,9 @@
           <li><b>Mailing address:</b> PO Box 13006, Green Island, Dunedin 9052</li>
         </ul>
       </div>
-      <div class="col-4 contact-row">
+      <div class="col-4 contact-col">
         <h4>Join our mailing list</h4>
-        <a href="#"><svg class="animate-icon animate-3 bi ms-3" viewbox="0 0 24 24" width="120" height="120" fill="#43883fff" ;>
+        <a href="{{ url_for('mailings') }}"><svg class="animate-icon animate-3 bi ms-3" viewbox="0 0 24 24" width="120" height="120" fill="#43883fff" ;>
             <use xlink:href="#mailing" />
           </svg></a>
       </div>
@@ -93,19 +93,11 @@
   </div>
 
 
-  <!-- About -->
-  <div class="content container-fluid about-us">
-    <h4>About us</h4>
-    <p> The Greater Green Island Community Network was established in 2013 when a group of like-minded people came together with a shared desire to foster a strong community which works together to develop its own solutions - a community where
-      neighbourhoods are again full of people we know as our neighbours.</p>
-    <p> The Community Network has hosted a range of community events such as a teddy bear's picnic, astronomy evening, community expos and artisan markets,
-      and has been instrumental in organizing road safety changes and community beautification. </p>
-  </div>
 
-  <!-- Carousel -->
-  <div class="carousel-section">
+  <!-- Carousel (mobile only)-->
+  <div class="carousel-section mobile-div">
   <h4>What's happening in GGI</h4>
-  <div id="carouselControls" class="carousel slide" data-bs-ride="carousel">
+  <div id="carouselControls" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
     <div class="carousel-inner">
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -113,7 +105,7 @@
         <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
       </div>
       <div class="carousel-item active">
-        <a href="#">
+        <a href="{{url_for('playground') }}">
           <div class="d-flex w-100">
             <img src="static/images/playground.jpg" class="carousel-img" alt="...">
             <div class="carousel-caption">
@@ -124,7 +116,7 @@
         </a>
       </div>
       <div class="carousel-item">
-        <a href="#">
+        <a href="{{url_for('things') }}">
           <div class="d-flex w-100">
             <img src="static/images/brighton-beach.jpg" class="carousel-img" alt="...">
             <div class="carousel-caption">
@@ -157,6 +149,48 @@
     </button>
   </div>
   </div>
+
+
+<!-- Link Cards (desktop only, replaces carousel) -->
+  <div class="container desktop-contacts">
+    <div class="row box-row">
+
+      <div class="col-4">
+          <a href="{{url_for('playground') }}">
+            <img src="static/images/playground.jpg" class="d-block mx-lg-auto img-fluid box-card" loading="lazy">
+          </a>
+          <h4>Playground & BBQ Area</h4>
+          <p>Check out what's happening at the family playground and family BBQ area at the Memorial Gardens in Green Island.</p>
+      </div>
+
+      <div class="col-4">
+          <a href="{{url_for('things') }}" >
+            <img src="static/images/brighton-beach.jpg" class="d-block mx-lg-auto img-fluid box-card" loading="lazy">
+          </a>
+          <h4>Things to Do & See in GGI</h4>
+          <p>Click to view our recreational areas and other things to do in Greater Green Island, from beaches to community groups.</p>
+      </div>
+
+      <div class="col-4">
+          <a href="{{url_for('informer') }}">
+            <img src="static/images/informer.png" class="d-block mx-lg-auto img-fluid box-card" loading="lazy">
+          </a>
+          <h4>Greater Green Island Informer</h4>
+          <p>Read the Greater Green Island Informer articles online here, or sign up to our email list to keep in touch.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- About -->
+  <div class="content container-fluid about-us">
+    <h4>About us</h4>
+    <p> The Greater Green Island Community Network was established in 2013 when a group of like-minded people came together with a shared desire to foster a strong community which works together to develop its own solutions - a community where
+      neighbourhoods are again full of people we know as our neighbours.</p>
+    <p> The Community Network has hosted a range of community events such as a teddy bear's picnic, astronomy evening, community expos and artisan markets,
+      and has been instrumental in organizing road safety changes and community beautification. </p>
+  </div>
+
 
 <!-- moved JS to base -->
 

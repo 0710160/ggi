@@ -1,28 +1,53 @@
 from flask import Flask, render_template, request, url_for, redirect, flash, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
+# from flask_migrate import Migrate
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.exceptions import HTTPException
+from werkzeug.utils import secure_filename
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from flask_ckeditor import CKEditor, CKEditorField, upload_success, upload_fail
 import os
-#import psycopg2
+# import psycopg2
 import bleach
+
+## Define folder for image uploads
+UPLOAD_FOLDER = 'static/uploads/'
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
 ckeditor = CKEditor(app)
 app.config['CKEDITOR_HEIGHT'] = 500
-
-## Connect to DB
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", 'sqlite:///ggi.db')
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "(*Hh998gaH*(H*98&^")
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
 
+##TODO: comment SQLlite, uncomment MySQL, Migrate(app, db) and flask_migrate import before publishing
+
+## Connect to SQLlite
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", 'sqlite:///ggi.db')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+## Connect to PythonAnywhere MySQL
+'''
+SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
+    username="0710160",
+    password="facing-stipend-cycling-coauthor",
+    hostname="0710160.mysql.pythonanywhere-services.com",
+    databasename="0710160$ggicn",  ## switch to 0710160$dummydb to migrate
+)
+app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
+app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+'''
+
+db = SQLAlchemy(app)
+# migrate = Migrate(app, db)
 
 ## Flask login manager
 login_manager = LoginManager()
 login_manager.init_app(app)
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -41,7 +66,7 @@ class Article(db.Model):
     subtitle = db.Column(db.String(256))
     body = db.Column(db.Text, nullable=False)
     date = db.Column(db.String(256))
-    #img_url = db.Column(db.String(250))
+    img_name = db.Column(db.String(250))
 
 
 class MailingList(db.Model):
@@ -50,7 +75,13 @@ class MailingList(db.Model):
     email = db.Column(db.String(256), nullable=False)
 
 
-db.create_all()
+#db.create_all()
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 ## strips invalid tags/attributes
 def bleach_html(content):
@@ -77,8 +108,7 @@ def home():
 
 @app.route("/informer")
 def informer():
-    articles = Article.query.all()
-    return render_template("informer.html", articles=articles)
+    return render_template("informer.html", articles=Article.query.all())
 
 
 @app.route("/informer/<article_id>")
@@ -140,6 +170,34 @@ def garden():
     return render_template("garden.html")
 
 
+@app.route("/playground")
+def playground():
+    return render_template("playground.html")
+
+
+@app.route("/things-to-do")
+def things():
+    return render_template("things-to-do.html")
+
+
+@app.route("/mailing", methods=["GET", "POST"])
+def mailings():
+    if request.method == "GET":
+        return render_template("mailing.html")
+    else:
+        name = request.form["name"]
+        email = request.form["email"]
+        new_mailing = MailingList(email=email, name=name)
+        if MailingList.query.filter_by(email=email).first():
+            flash("You're already signed up!")
+            return render_template("mailing.html")
+        else:
+            db.session.add(new_mailing)
+            db.session.commit()
+            flash("Thanks for signing up!")
+            return render_template("mailing.html")
+
+
 @app.route("/shed")
 def shed():
     return render_template("shed.html")
@@ -155,10 +213,46 @@ def add():
         new_article_sub = request.form["subtitle"]
         new_article_body = bleach_html(request.form.get('ckeditor'))
         current_date = datetime.today().strftime('%d-%m-%Y')
-        new_article = Article(title=new_article_title, subtitle=new_article_sub, body=new_article_body, date=current_date)
+        img_name = "null"
+        new_article = Article(title=new_article_title, subtitle=new_article_sub, body=new_article_body,
+                              date=current_date, img_name=img_name)
         db.session.add(new_article)
         db.session.commit()
-        return redirect(url_for('home', current_user=current_user))
+        return redirect(url_for('upload_file', current_user=current_user))
+
+
+@app.route("/upload", methods=["GET", "POST"])
+def upload_file():
+    if request.method == 'GET':
+        return render_template('upload.html')
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # if user does not select a file, browser submits empty part without filename
+        if file.filename == '':
+            flash('No file selected for uploading')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            orig_filename = secure_filename(file.filename)
+            orig_extn = orig_filename.split(".")[1]
+            descending = Article.query.order_by(Article.id.desc())
+            last_article = descending.first()
+            filename = f'informer{last_article.id}.{orig_extn}'
+            last_article.img_name = filename
+            db.session.commit()
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            print('upload_image filename: ' + filename)
+            #flash('Image successfully uploaded and displayed below. You may now return home.')
+            return redirect(url_for('informer', current_user=current_user))
+
+
+@app.route('/display/<filename>')
+def display_image(filename):
+    print('display_image filename: ' + filename)
+    return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
 
 @app.route("/edit/<article_id>", methods=["GET", "POST"])
@@ -182,7 +276,7 @@ def edit(article_id):
     body = request.form.get('ckeditor')
     edit_article.body = body
     db.session.commit()
-    return redirect(url_for('home', current_user=current_user))
+    return redirect(url_for('informer', current_user=current_user))
 
 
 @app.route("/delete/<article_id>")
@@ -191,7 +285,7 @@ def delete(article_id):
     delete_article = Article.query.get(article_id)
     db.session.delete(delete_article)
     db.session.commit()
-    return redirect(url_for('home', current_user=current_user))
+    return redirect(url_for('informer', current_user=current_user))
 
 
 ## User handling functions
