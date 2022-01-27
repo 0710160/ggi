@@ -13,6 +13,7 @@ import bleach
 
 ## Define folder for image uploads
 UPLOAD_FOLDER = 'static/uploads/'
+#UPLOAD_FOLDER = '/home/0710160/ggi/static/uploads/'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
@@ -240,11 +241,11 @@ def upload_file():
             orig_extn = orig_filename.split(".")[1]
             descending = Article.query.order_by(Article.id.desc())
             last_article = descending.first()
-            filename = f'informer{last_article.id}.{orig_extn}'
-            last_article.img_name = filename
+            new_filename = f'informer{last_article.id}.{orig_extn}'
+            last_article.img_name = new_filename
             db.session.commit()
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            print('upload_image filename: ' + filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], new_filename))
+            print('upload_image filename: ' + new_filename)
             #flash('Image successfully uploaded and displayed below. You may now return home.')
             return redirect(url_for('informer', current_user=current_user))
 
