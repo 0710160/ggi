@@ -116,8 +116,6 @@ def home():
     return render_template("index.html")
 
 
-
-
 @app.route("/mailing", methods=["GET", "POST"])
 def mailings():
     if request.method == "GET":
