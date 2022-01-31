@@ -1,12 +1,11 @@
-from flask import Flask, render_template, request, url_for, redirect, flash, send_from_directory
+from flask import Flask, render_template, request, url_for, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 # from flask_migrate import Migrate
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
-from werkzeug.exceptions import HTTPException
 from werkzeug.utils import secure_filename
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
-from flask_ckeditor import CKEditor, CKEditorField, upload_success, upload_fail
+from flask_ckeditor import CKEditor
 import os
 # import psycopg2
 import bleach
@@ -23,7 +22,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "(*Hh998gaH*(H*98&^")
 
-##TODO: comment SQLlite, uncomment MySQL, Migrate(app, db) and flask_migrate import before publishing
+##TODO: comment SQLlite, uncomment MySQL, Migrate(app, db) and flask_migrate import before publishing (COUNT 4 THINGS)
 
 ## Connect to SQLlite
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", 'sqlite:///ggi.db')
@@ -85,7 +84,7 @@ class MailingList(db.Model):
     email = db.Column(db.String(256), nullable=False)
 
 
-db.create_all()
+#db.create_all()
 
 
 def allowed_file(filename):
@@ -114,8 +113,6 @@ def bleach_html(content):
 @app.route("/")
 def home():
     return render_template("index.html")
-
-
 
 
 @app.route("/mailing", methods=["GET", "POST"])

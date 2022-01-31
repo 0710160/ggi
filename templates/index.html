@@ -1,12 +1,9 @@
 {% extends "base.html" %}
+{% block nav_home %}active{% endblock nav_home %}
+{% block title %}Welcome to Greater Green Island{% endblock %}
+{% block image %}header-img{% endblock image %}
 {% block content %}
 
-  <!-- Heading Image -->
-  <div class="container-fluid header-img">
-    <div class="title-text">
-      <h1>{% block title %}Welcome to Greater Green Island{% endblock %}</h1>
-    </div>
-  </div>
 
   <!-- Mobile Contact Info -->
   <div class="content container-fluid contact mobile-div">
@@ -194,4 +191,4 @@
 
 <!-- moved JS to base -->
 
-{% endblock %}
+{% endblock content %}

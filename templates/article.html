@@ -1,12 +1,8 @@
 {% extends "base.html" %}
+{% block nav_informer %}active{% endblock nav_informer %}
+{% block image %}article-img" style="background-image: url(/static/uploads/{{ article.img_name }});{% endblock image %}
+{% block title %}{{ article.title }}{% endblock title %}
 {% block content %}
-
-<!-- Heading Image -->
-<div class="container-fluid article-img" style="background-image: url(/static/uploads/{{ article.img_name }});">
-  <div class="title-text">
-    <h1>{{ article.title }}</h1>
-  </div>
-</div>
 
 
   <!-- Left/Right navigation icons -->
