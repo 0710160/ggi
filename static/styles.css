@@ -236,13 +236,13 @@ INFORMER
 .nav-left {
   position: fixed;
   top: 50vh;
-  left: 2vw;
+  left: 1vw;
 }
 
 .nav-right {
   position: fixed;
   top: 50vh;
-  right: 2vw;
+  right: 1vw;
 }
 
 
@@ -408,6 +408,14 @@ MEDIA QUERIES: DESKTOP
 
   .article {
     padding: 3vh 15vw;
+  }
+
+  .nav-left {
+    left: 3vw;
+  }
+
+  .nav-right {
+    right: 3vw;
   }
 }
 
