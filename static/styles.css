@@ -103,8 +103,10 @@ EVENTS
   font-size: 1.25rem;
 }
 
+
 .img-fluid {
-  max-height: 500px;
+  max-height: 350px;
+  max-width: 500px;
 }
 
 /*-----------------------------------------------------------------------------

@@ -15,11 +15,11 @@
 
   {% if i.id % 2 == 0 %}
   <div class="event-heroes container col-xxl-8 px-4 py-5">
-    <h5><a href="/informer/{{ i.id }}">{{ i.title }}</a></h5>
+    <h5><a href="/events/{{ i.id }}">{{ i.title }}</a></h5>
     <h6>{{ i.subtitle }}</h6>
     <div class="row flex-lg-row-reverse align-items-top">
       <div class="col-10 col-sm-8 col-lg-6">
-        <img src="static/uploads/{{ i.img_name }}", class="d-block mx-lg-auto img-fluid" width="500" height="350" loading="lazy">
+        <img src="static/uploads/{{ i.img_name }}", class="d-block mx-lg-auto img-fluid" loading="lazy">
       </div>
       <div class="line-clamp col-lg-6">
         {% if current_user.is_authenticated %}

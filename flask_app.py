@@ -244,7 +244,7 @@ def previous_article(article_id):
     descending = Article.query.order_by(Article.id.desc())
     last_article = descending.first()
     if curr_article == last_article:
-        return render_template("article.html", article=curr_article)
+        return redirect(url_for('informer'))
     else:
         prev_article_num = int(curr_article.id + 1)
         prev_article = Article.query.get(prev_article_num)
