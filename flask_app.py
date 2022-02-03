@@ -222,6 +222,10 @@ def edit(article_id):
 def delete(article_id):
     delete_article = Article.query.get(article_id)
     db.session.delete(delete_article)
+    i = 1
+    for article in Article.query.order_by(Article.id.asc()):
+        article.id = i
+        i += 1
     db.session.commit()
     return redirect(url_for('informer', current_user=current_user))
 
@@ -328,6 +332,10 @@ def edit_event(event_id):
 def delete_event(event_id):
     delete_article = Events.query.get(event_id)
     db.session.delete(delete_article)
+    i = 1
+    for event in Events.query.order_by(Events.id.asc()):
+        event.id = i
+        i += 1
     db.session.commit()
     return redirect(url_for('events', current_user=current_user))
 

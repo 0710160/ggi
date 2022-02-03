@@ -105,7 +105,7 @@ EVENTS
 }
 
 
-.img-fluid {
+.event-heroes .img-fluid {
   max-height: 350px;
   max-width: 500px;
 }
@@ -146,6 +146,14 @@ DIRECTORY
 
 .card ul li:hover, .card ul li:focus {
   outline: none;
+}
+
+
+/*-----------------------------------------------------------------------------
+PROJECTS
+-----------------------------------------------------------------------------*/
+.feature-hero {
+  margin: 3% auto;
 }
 
 
@@ -229,7 +237,7 @@ INFORMER
 }
 
 .article {
-  padding: 0 15vw;
+  padding: 0 12.5vw;
 }
 
 .article p {
@@ -239,13 +247,22 @@ INFORMER
 .nav-left {
   position: fixed;
   top: 50vh;
-  left: 1vw;
+  left: 0vw;
 }
 
 .nav-right {
   position: fixed;
   top: 50vh;
-  right: 1vw;
+  right: 0vw;
+}
+
+.navigation-icons {
+  transform: scale(0.75);
+}
+
+.card-div .img-fluid {
+  max-height: 350px;
+  max-width: 500px;
 }
 
 
@@ -283,6 +300,7 @@ footer {
   padding-top: 10px;
   padding-bottom: 30px;
   text-align: center;
+  margin-top: 40px;
 }
 
 .footer-row {
@@ -292,6 +310,7 @@ footer {
 footer p {
   margin-bottom: 0.1rem;
 }
+
 
 /*-----------------------------------------------------------------------------
 MEDIA QUERIES: DESKTOP
@@ -420,6 +439,11 @@ MEDIA QUERIES: DESKTOP
   .nav-right {
     right: 3vw;
   }
+
+  .navigation-icons {
+    transform: scale(1);
+  }
+
 }
 
 /*-----------------------------------------------------------------------------
