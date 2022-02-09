@@ -70,6 +70,7 @@ NAVBAR
 
 .title-text h1 {
   font-size: 2rem;
+  text-shadow: 2px 2px 4px var(--secondary);
   font-weight: 600;
 }
 
