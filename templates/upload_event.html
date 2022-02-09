@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block nav_events %}active{% endblock nav_events %}
+{% block title %} | Add New Event{% endblock title %}
+{% block heading %}Add New Event{% endblock heading %}
+{% block image %}header-img{% endblock image %}
+{% block content %}
+
+<br><br>
+<p>
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+		<ul>
+		{% for message in messages %}
+		  <li>{{ message }}</li>
+		{% endfor %}
+		</ul>
+	  {% endif %}
+	{% endwith %}
+</p>
+{% if filename %}
+	<div>
+		<img src="{{ url_for('display_image', filename=filename) }}">
+	</div>
+{% endif %}
+<form method="post" action="/upload_event" enctype="multipart/form-data">
+    <dl>
+		<p>
+			<input type="file" name="file" autocomplete="off" required>
+		</p>
+    </dl>
+    <p>
+		<input type="submit" value="Submit">
+	</p>
+</form>
+</br></br>
+
+{% endblock content %}

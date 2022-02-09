@@ -1,12 +1,10 @@
 {% extends "base.html" %}
+{% block nav_informer %}active{% endblock nav_informer %}
+{% block image %}article-img" style="background-image: url(/static/uploads/{{ article.img_name }});{% endblock image %}
+{% block title %} | Informer{% endblock title %}
+{% block meta %}{{ article.body|safe }}{% endblock meta %}
+{% block heading %}{{ article.title }}{% endblock heading %}
 {% block content %}
-
-<!-- Heading Image -->
-<div class="container-fluid article-img" style="background-image: url(/static/uploads/{{ article.img_name }});">
-  <div class="title-text">
-    <h1>{{ article.title }}</h1>
-  </div>
-</div>
 
 
   <!-- Left/Right navigation icons -->
@@ -26,7 +24,7 @@
   </div>
 </a>
 
-  <div class='article content container-fluid'>
+  <div class='article container-fluid'>
     <h2>{{ article.subtitle }}</h2>
     <p>{{ article.body|safe }}
   </div>

@@ -44,9 +44,20 @@ NAVBAR
   box-shadow: 0 8px 6px -6px rgb(0 0 0 / 20%);
 }
 
+.no-webp .header-img {
+  background: url("images/playground.jpeg") center;
+}
+
+.no-js .header-img {
+  background: url("images/playground.jpeg") center;
+}
+
+.webp .header-img {
+  background: url("images/playground-opening.webp") center;
+}
+
 .header-img {
   height: 40vh;
-  background: url("images/playground.jpeg") center;
   background-size: cover;
 }
 
@@ -59,6 +70,7 @@ NAVBAR
 
 .title-text h1 {
   font-size: 2rem;
+  text-shadow: 2px 2px 4px var(--secondary);
   font-weight: 600;
 }
 
@@ -88,6 +100,7 @@ CONTENT
   display: none;
 }
 
+
 /*-----------------------------------------------------------------------------
 EVENTS
 -----------------------------------------------------------------------------*/
@@ -103,8 +116,10 @@ EVENTS
   font-size: 1.25rem;
 }
 
-.img-fluid {
-  max-height: 500px;
+
+.event-heroes .img-fluid {
+  max-height: 350px;
+  max-width: 500px;
 }
 
 /*-----------------------------------------------------------------------------
@@ -147,14 +162,33 @@ DIRECTORY
 
 
 /*-----------------------------------------------------------------------------
+PROJECTS
+-----------------------------------------------------------------------------*/
+.feature-hero {
+  margin: 3% auto;
+}
+
+
+/*-----------------------------------------------------------------------------
 ABOUT US
 -----------------------------------------------------------------------------*/
+.no-webp .about-us {
+  background-image: url("images/network.jpg");
+}
+
+.no-js .about-us {
+  background-image: url("images/network.jpg");
+}
+
+.webp .about-us {
+  background-image: url("images/network.webp");
+}
+
 .about-us {
   margin-top: 5%;
   color: var(--secondary);
   padding: 8%;
   background-color: #E3E3E3;
-  background-image: url("images/network.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -225,6 +259,10 @@ INFORMER
   background-position: center;
 }
 
+.article {
+  padding: 0 12.5vw;
+}
+
 .article p {
   white-space: pre-line;
 }
@@ -232,13 +270,22 @@ INFORMER
 .nav-left {
   position: fixed;
   top: 50vh;
-  left: 3vw;
+  left: 0vw;
 }
 
 .nav-right {
   position: fixed;
   top: 50vh;
-  right: 3vw;
+  right: 0vw;
+}
+
+.navigation-icons {
+  transform: scale(0.75);
+}
+
+.card-div .img-fluid {
+  max-height: 350px;
+  max-width: 500px;
 }
 
 
@@ -276,6 +323,7 @@ footer {
   padding-top: 10px;
   padding-bottom: 30px;
   text-align: center;
+  margin-top: 40px;
 }
 
 .footer-row {
@@ -285,6 +333,7 @@ footer {
 footer p {
   margin-bottom: 0.1rem;
 }
+
 
 /*-----------------------------------------------------------------------------
 MEDIA QUERIES: DESKTOP
@@ -405,6 +454,19 @@ MEDIA QUERIES: DESKTOP
   .article {
     padding: 3vh 15vw;
   }
+
+  .nav-left {
+    left: 3vw;
+  }
+
+  .nav-right {
+    right: 3vw;
+  }
+
+  .navigation-icons {
+    transform: scale(1);
+  }
+
 }
 
 /*-----------------------------------------------------------------------------
