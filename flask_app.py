@@ -222,6 +222,10 @@ def edit(article_id):
 def delete(article_id):
     delete_article = Article.query.get(article_id)
     db.session.delete(delete_article)
+    i = 1
+    for article in Article.query.order_by(Article.id.asc()):
+        article.id = i
+        i += 1
     db.session.commit()
     return redirect(url_for('informer', current_user=current_user))
 
@@ -244,7 +248,7 @@ def previous_article(article_id):
     descending = Article.query.order_by(Article.id.desc())
     last_article = descending.first()
     if curr_article == last_article:
-        return render_template("article.html", article=curr_article)
+        return redirect(url_for('informer'))
     else:
         prev_article_num = int(curr_article.id + 1)
         prev_article = Article.query.get(prev_article_num)
@@ -328,6 +332,10 @@ def edit_event(event_id):
 def delete_event(event_id):
     delete_article = Events.query.get(event_id)
     db.session.delete(delete_article)
+    i = 1
+    for event in Events.query.order_by(Events.id.asc()):
+        event.id = i
+        i += 1
     db.session.commit()
     return redirect(url_for('events', current_user=current_user))
 

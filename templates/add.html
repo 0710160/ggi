@@ -1,13 +1,9 @@
 {% extends "base.html" %}
+{% block nav_informer %}active{% endblock nav_informer %}
+{% block title %} | Add New Article{% endblock title %}
+{% block heading %}Add New Article{% endblock heading %}
+{% block image %}header-img{% endblock image %}
 {% block content %}
-
-
-<!-- Heading Image -->
-<div class="container-fluid header-img">
-    <div class="title-text">
-        <h1>{% block title %}Add New Article{% endblock %}</h1>
-    </div>
-</div>
 
 <div class="container article">
     <form action="" method="POST">
@@ -20,4 +16,4 @@
 </div>
 {{ ckeditor.load() }}
 
-{% endblock %}
+{% endblock content %}

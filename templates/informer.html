@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block nav_informer %}active{% endblock nav_informer %}
-{% block title %}Greater Green Island Informer{% endblock %}
+{% block title %} | Informer{% endblock title %}
+{% block heading %}Greater Green Island Informer{% endblock heading %}
+{% block meta %}The Greater Green Island Informer is a free monthly newsletter printed and distributed around the Greater Green Island area with articles about our sports groups, schools, community garden, road updates, community events and more. Find it online here.{% endblock meta %}
 {% block image %}header-img{% endblock image %}
 {% block content %}
 
@@ -15,12 +17,12 @@
     <div class="row">
 
       {% for i in articles %}
-      <div class="container col-xxl-8">
-        <div class="row flex-lg-row align-items-center g-5 py-5">
-          <div class="col-10 col-sm-8 col-lg-6">
-            <img src="static/uploads/{{ i.img_name }}", class="d-block mx-lg-auto img-fluid" width="500" height="350" loading="lazy">
+      <div class="container px-4 py-5">
+        <div class="row flex-lg-row align-items-top">
+          <div class="col-10 col-lg-6">
+            <img src="static/uploads/{{ i.img_name }}", class="d-block mx-lg-auto img-fluid" loading="lazy">
           </div>
-          <div class="line-clamp col-lg-6">
+          <div class="line-clamp col-10 col-lg-6">
             <h5><a href="/informer/{{ i.id }}">{{ i.title }}</a></h5>
             <h6>{{ i.subtitle }}</h6>
             {% if current_user.is_authenticated %}
