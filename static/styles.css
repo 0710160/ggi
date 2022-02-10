@@ -284,8 +284,12 @@ INFORMER
 }
 
 .card-div .img-fluid {
-  max-height: 350px;
-  max-width: 500px;
+  max-height: 200px;
+  max-width: 450px;
+}
+
+.informer .line-clamp {
+  max-height: 200px;
 }
 
 
@@ -317,8 +321,7 @@ MAILING
 FOOTER
 -----------------------------------------------------------------------------*/
 footer {
-  background-color: var(--theme);
-  color: white;
+  color: var(--theme);
   font-size: 75%;
   padding-top: 10px;
   padding-bottom: 30px;
@@ -334,6 +337,10 @@ footer p {
   margin-bottom: 0.1rem;
 }
 
+footer .ggi-logo {
+  width: -webkit-fill-available;
+  max-width: 11vw;
+}
 
 /*-----------------------------------------------------------------------------
 MEDIA QUERIES: DESKTOP
@@ -465,6 +472,10 @@ MEDIA QUERIES: DESKTOP
 
   .navigation-icons {
     transform: scale(1);
+  }
+
+  .informer a {
+    font-size: 150%;
   }
 
 }

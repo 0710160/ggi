@@ -14,10 +14,9 @@
 
   <!-- Article cards -->
   <div class="container-fluid card-div">
-    <div class="row">
 
       {% for i in articles %}
-      <div class="container px-4 py-5">
+      <div class="container px-4 py-5 informer">
         <div class="row flex-lg-row align-items-top">
           <div class="col-10 col-lg-6">
             <img src="static/uploads/{{ i.img_name }}", class="d-block mx-lg-auto img-fluid" loading="lazy">
@@ -37,7 +36,6 @@
       </div>
       {% endfor %}
     </div>
-  </div>
 
 
 {% endblock %}
