@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block nav_informer %}active{% endblock nav_informer %}
-{% block title %} | Informer{% endblock title %}
+{% block title %}Greater Green Island | Informer{% endblock title %}
 {% block heading %}Greater Green Island Informer{% endblock heading %}
 {% block meta %}The Greater Green Island Informer is a free monthly newsletter printed and distributed around the Greater Green Island area with articles about our sports groups, schools, community garden, road updates, community events and more. Find it online here.{% endblock meta %}
 {% block image %}header-img{% endblock image %}
@@ -17,12 +17,14 @@
 
       {% for i in articles %}
       <div class="container px-4 py-5 informer">
-        <div class="row flex-lg-row align-items-top">
-          <div class="col-10 col-lg-6">
+        <div class="post row flex-lg-row align-items-top">
+          <div class="col-10 col-lg-4 aspect-box">
             <img src="static/uploads/{{ i.img_name }}", class="d-block mx-lg-auto img-fluid" loading="lazy">
           </div>
-          <div class="line-clamp col-10 col-lg-6">
-            <h5><a href="/informer/{{ i.id }}">{{ i.title }}</a></h5>
+          <div class="line-clamp col-10 col-lg-6 card">
+            <ul>
+              <li><a href="/informer/{{ i.id }}" title="{{ i.title }}">{{ i.title }}</a></li>
+            </ul>
             <h6>{{ i.subtitle }}</h6>
             {% if current_user.is_authenticated %}
             <div>
@@ -37,5 +39,15 @@
       {% endfor %}
     </div>
 
+<script src="{{ url_for('static', filename='infinite-scroll.pkgd.min.js') }}"></script>
+<script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
+<script>
+	$('.container').infiniteScroll({
+		// options
+		path: '.pagination__next',
+		append: '.post',
+		history: false,
+	});
+</script>
 
 {% endblock %}

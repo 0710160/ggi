@@ -366,11 +366,6 @@ def groups():
     return render_template("groups.html")
 
 
-@app.route("/venues")
-def venues():
-    return render_template("venues.html")
-
-
 @app.route("/roadupdates")
 def roadupdates():
     return render_template("roadupdates.html")

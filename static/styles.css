@@ -69,7 +69,6 @@ NAVBAR
 }
 
 .title-text h1 {
-  font-size: 2rem;
   text-shadow: 2px 2px 4px var(--secondary);
   font-weight: 600;
 }
@@ -100,8 +99,6 @@ CONTENT
   display: none;
 }
 
-
-
 /*-----------------------------------------------------------------------------
 EVENTS
 -----------------------------------------------------------------------------*/
@@ -113,14 +110,10 @@ EVENTS
   overflow: hidden;
 }
 
-.event-heroes p {
-  font-size: 1.25rem;
-}
-
-
 .event-heroes .img-fluid {
-  max-height: 350px;
-  max-width: 500px;
+  object-fit: cover;
+  height: max(200px, 100%);
+  width: max(300px, 100%);
 }
 
 /*-----------------------------------------------------------------------------
@@ -284,15 +277,41 @@ INFORMER
   transform: scale(0.75);
 }
 
+.aspect-box {
+  aspect-ratio: 3/1;
+}
+
 .card-div .img-fluid {
-  max-height: 200px;
-  max-width: 450px;
+  object-fit: cover;
+  height: max(200px, 100%);
+  width: max(300px, 100%);
+/*  max-height: 200px;
+  max-width: 450px;*/
 }
 
-.informer .line-clamp {
+ .line-clamp {
   max-height: 200px;
 }
 
+/*----------------------------------------------------------------------------
+THINGS TO DO
+-----------------------------------------------------------------------------*/
+.things-img {
+  height: 50vh;
+  background-size: cover!important;
+}
+
+.no-webp .things-img {
+  background: url("images/image3-1.jpeg") center;
+}
+
+.no-js .things-img {
+  background: url("images/image3-1.jpeg") center;
+}
+
+.webp .things-img {
+  background: url("images/image3-1.webp") center;
+}
 
 /*----------------------------------------------------------------------------
 LOGIN
@@ -325,7 +344,6 @@ footer {
   color: var(--theme);
   font-size: 75%;
   padding-top: 10px;
-  padding-bottom: 30px;
   text-align: center;
   margin-top: 40px;
 }
@@ -345,6 +363,14 @@ footer .ggi-logo {
 
 .desktop-div {
   display: none;
+}
+
+.footer-icon {
+  vertical-align: middle;
+}
+
+.footer-contact {
+  padding: 20px 0;
 }
 
 /*-----------------------------------------------------------------------------
@@ -381,7 +407,7 @@ MEDIA QUERIES: DESKTOP
   }
 
   .title-text h1 {
-    font-size: 4rem;
+    font-size: clamp(4rem, 75%, 5rem);
     text-align: center;
     text-shadow: 2px 2px 4px var(--secondary);
   }
@@ -484,7 +510,7 @@ MEDIA QUERIES: DESKTOP
   }
 
   .informer a {
-    font-size: 150%;
+    font-size: 115%;
   }
 
 }

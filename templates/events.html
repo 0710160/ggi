@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block nav_events %}active{% endblock nav_events %}
-{% block title %} | Events{% endblock title %}
+{% block title %}Greater Green Island | Events{% endblock title %}
 {% block heading %}Greater Green Island Events{% endblock heading %}
 {% block meta %}Find out what events are coming up in the Greater Green Island area.{% endblock meta %}
 {% block image %}header-img{% endblock image %}
@@ -12,19 +12,21 @@
 </div>
 {% endif %}
 
-  <!-- Heroes -->
+  <!-- Event Heroes -->
 <div class="row">
   {% for i in events %}
 
   {% if i.id % 2 == 0 %}
-  <div class="event-heroes container px-4 py-5">
-    <h5><a href="/events/{{ i.id }}">{{ i.title }}</a></h5>
-    <h6>{{ i.subtitle }}</h6>
+  <div class="event-heroes container col-xxl-8 px-4 py-5">
     <div class="row flex-lg-row-reverse align-items-top">
-      <div class="col-10 col-lg-6">
+      <div class="col-10 col-lg-4 aspect-box">
         <img src="static/uploads/{{ i.img_name }}", class="d-block mx-lg-auto img-fluid" loading="lazy">
       </div>
-      <div class="line-clamp col-10 col-lg-6">
+      <div class="line-clamp col-10 col-lg-6 card">
+        <ul>
+          <li><a href="/events/{{ i.id }}" title="{{ i.title }}">{{ i.title }}</a></li>
+        </ul>
+        <h6>{{ i.subtitle }}</h6>
         {% if current_user.is_authenticated %}
         <div>
           <a class="btn btn-primary" href="/edit_event/{{ i.id}}">Edit event</a>
@@ -40,28 +42,43 @@
   <hr />
 {% else %}
   <!-- ALTERNATING HERO PICTURE POSITIONING -->
-<div class="event-heroes container col-xxl-8 px-4 py-5">
-  <h4 class="mb-4">{{ i.title }}</h4>
-  <div class="row flex-lg-row align-items-top">
-    <div class="col-10 col-sm-8 col-lg-6">
-      <img src="static/uploads/{{ i.img_name }}", class="d-block mx-lg-auto img-fluid" width="500" height="350" loading="lazy">
-    </div>
-    <div class="line-clamp col-lg-6">
-      {% if current_user.is_authenticated %}
-      <div>
-        <a class="btn btn-primary" href="/edit_event/{{ i.id}}">Edit event</a>
-        <a class="btn btn-danger" href="/delete_event/{{ i.id}}">Delete event</a>
+  <div class="event-heroes container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row align-items-top">
+      <div class="col-10 col-lg-4 aspect-box">
+        <img src="static/uploads/{{ i.img_name }}", class="d-block mx-lg-auto img-fluid" loading="lazy">
       </div>
-      {% endif %}
-      <p class="lead">{{ i.body|safe }}</p>
-      <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+      <div class="line-clamp col-10 col-lg-6 card">
+        <ul>
+          <li><a href="/events/{{ i.id }}" title="{{ i.title }}">{{ i.title }}</a></li>
+        </ul>
+        <h6>{{ i.subtitle }}</h6>
+        {% if current_user.is_authenticated %}
+        <div>
+          <a class="btn btn-primary" href="/edit_event/{{ i.id}}">Edit event</a>
+          <a class="btn btn-danger" href="/delete_event/{{ i.id}}">Delete event</a>
+        </div>
+        {% endif %}
+        <p class="lead">{{ i.body|safe }}</p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        </div>
       </div>
     </div>
   </div>
-</div>
+
 <hr />
 {% endif %}
 {% endfor %}
 </div>
+
+<script src="{{ url_for('static', filename='infinite-scroll.pkgd.min.js') }}"></script>
+<script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
+<script>
+	$('.container').infiniteScroll({
+		// options
+		path: '.pagination__next',
+		append: '.post',
+		history: false,
+	});
+</script>
 
 {% endblock %}
