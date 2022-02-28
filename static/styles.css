@@ -341,11 +341,12 @@ MAILING
 FOOTER
 -----------------------------------------------------------------------------*/
 footer {
-  color: var(--theme);
+  color: #fff;
+  background: rgb(3,105,57);
+  background: linear-gradient(90deg, rgba(3,105,57,1) 0%, rgba(42,106,54,1) 50%);
   font-size: 75%;
   padding-top: 10px;
   text-align: center;
-  margin-top: 40px;
 }
 
 .footer-row {
@@ -356,21 +357,33 @@ footer p {
   margin-bottom: 0.1rem;
 }
 
-footer .ggi-logo {
-  width: -webkit-fill-available;
-  max-width: 11vw;
-}
-
 .desktop-div {
   display: none;
 }
 
 .footer-icon {
-  vertical-align: middle;
+  max-width: 20vw;
 }
 
 .footer-contact {
   padding: 20px 0;
+}
+
+.weather {
+  padding: 20px 0;
+}
+
+.ggicn-info {
+  font-size: 120%;
+  padding: 3vh 5vw;
+}
+
+.all-div {
+  display: flex!important;
+}
+
+.all-div ul {
+  list-style-type: none;
 }
 
 /*-----------------------------------------------------------------------------

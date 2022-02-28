@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block nav_informer %}active{% endblock nav_informer %}
 {% block image %}article-img" style="background-image: url(/static/uploads/{{ article.img_name }});{% endblock image %}
-{% block title %}{{ artile.title }}{% endblock title %}
-{% block meta %}{{ article.body|safe }}{% endblock meta %}
+{% block title %}{{ article.title }}{% endblock title %}
 {% block heading %}{{ article.title }}{% endblock heading %}
+{% block meta %}{{ article.body|safe }}{% endblock meta %}
 {% block content %}
 
 
