@@ -3,7 +3,7 @@
 {% block image %}article-img" style="background-image: url(/static/uploads/{{ article.img_name }});{% endblock image %}
 {% block title %}{{ article.title }}{% endblock title %}
 {% block heading %}{{ article.title }}{% endblock heading %}
-{% block meta %}{{ article.body|safe }}{% endblock meta %}
+{% block meta %}{{ article.body | tojson }}{% endblock meta %}
 {% block content %}
 
 
@@ -24,10 +24,54 @@
   </div>
 </a>
 
-  <div class='article container-fluid'>
-    <h2>{{ article.subtitle }}</h2>
-    <p>{{ article.body|safe }}
-  </div>
+<!-- Buttons to change font size -->
+  <div class="font-change">
+    <div class="row">
+      <div class="col">
+          <button class="btn" id="increase"><i class="bi bi-zoom-in"></i></button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button class="btn" id="decrease"><i class="bi bi-zoom-out"></i></button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button class="bi btn" id="reset">=</button>
+        </div>
+      </div>
+    </div>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>$(document).ready(function () {
+      $('#increase').click(function () {
+        modifyFontSize('increase');
+      });
+      $('#decrease').click(function () {
+        modifyFontSize('decrease');
+      });
+      $('#reset').click(function () {
+        modifyFontSize('reset');
+      })
+      function modifyFontSize(action) {
+        var divElement = $('.article');
+        var currentFontSize = parseInt(divElement.css('font-size'));
+        if (action == 'increase')
+          currentFontSize += 3;
+        else if (action == 'decrease')
+          currentFontSize -= 3;
+        else
+          currentFontSize = 16;
+        divElement.animate({ 'fontSize': currentFontSize }, 300);
+      }
+    });</script>
+
+
+<div class='article container-fluid'>
+  <h2>{{ article.subtitle }}</h2>
+  <p>{{ article.body|safe }}
+</div>
+</div>
 
 {% endblock %}

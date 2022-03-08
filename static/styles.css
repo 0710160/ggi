@@ -263,18 +263,29 @@ INFORMER
 
 .nav-left {
   position: fixed;
-  top: 50vh;
+  top: 45vh;
   left: 0vw;
 }
 
 .nav-right {
   position: fixed;
-  top: 50vh;
+  top: 45vh;
   right: 0vw;
 }
 
 .navigation-icons {
   transform: scale(0.75);
+}
+
+.font-change {
+  text-align: center;
+  position: fixed;
+  top: 52vh;
+  left: 1vw;
+}
+
+.font-change .bi {
+  color: var(--theme);
 }
 
 .aspect-box {
@@ -521,6 +532,14 @@ MEDIA QUERIES: DESKTOP
   .navigation-icons {
     transform: scale(1);
   }
+
+.font-change {
+  left: 3vw;
+}
+
+.font-change .bi {
+  font-size: 1.25rem;
+}
 
   .informer a {
     font-size: 115%;
